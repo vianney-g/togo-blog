@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Article front-matter — Le Togo en famille",
+  "description": "Schema de validation des métadonnées YAML front-matter des articles du blog.",
+  "type": "object",
+  "required": ["title", "date", "author", "draft"],
+  "properties": {
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120,
+      "description": "Titre de l'article. 1-120 caractères."
+    },
+    "date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date de publication au format ISO 8601 (ex: 2026-08-15T10:00:00+01:00)."
+    },
+    "author": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Nom de plume de l'auteur. AUCUN des 6 prénoms réels (bloqué par pre-commit hook)."
+    },
+    "draft": {
+      "type": "boolean",
+      "description": "true = brouillon (non publié), false = publié."
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 200,
+      "description": "Résumé court pour le SEO et le chapô. Max 200 caractères."
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true,
+      "description": "Tags libres (émergence naturelle). Ex: ['sokode', 'marche', 'cuisine']."
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["quotidien", "puits-de-jacob", "coulisses-vsi", "ce2", "memoire"]
+      },
+      "uniqueItems": true,
+      "description": "Catégories fermées (enum). Empêche la prolifération."
+    }
+  },
+  "additionalProperties": false
+}
