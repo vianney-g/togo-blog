@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+# =============================================================================
+# Pre-commit hook — Protection des prénoms réels
+# =============================================================================
+# Bloque tout commit contenant un des 6 prénoms réels de la famille.
+# Case-insensitive, word-boundary. Scanne uniquement les fichiers texte staged.
+#
+# Exit 0 = commit autorisé
+# Exit 1 = commit refusé (prénom détecté)
+# =============================================================================
+
+set -e
+
+# --- Prénoms interdits ---
+# Inclut les variantes avec/sans accent pour Joséphine
+FORBIDDEN='Vianney|Tiphaine|Jeanne|Jos[eé]phine|Mayeul|Marthe'
+
+# --- Fichiers staged (ajoutés, copiés, modifiés) ---
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM 2>/dev/null || true)
+
+# Rien à scanner → on passe
+if [ -z "$STAGED_FILES" ]; then
+    exit 0
+fi
+
+# --- Scan ---
+FOUND=0
+
+for file in $STAGED_FILES; do
+    # Ne scanner que les fichiers texte pertinents
+    case "$file" in
+        *.md|*.yaml|*.yml|*.toml|*.txt|*.json)
+            # Vérifier que le fichier existe (pas supprimé entre-temps)
+            if [ ! -f "$file" ]; then
+                continue
+            fi
+
+            # Chercher les prénoms (case-insensitive, word-boundary)
+            if grep -nEi "\b($FORBIDDEN)\b" "$file" > /tmp/precommit_match.$$ 2>/dev/null; then
+                if [ $FOUND -eq 0 ]; then
+                    echo ""
+                    echo "╔══════════════════════════════════════════════════╗"
+                    echo "║  Prénom réel détecté — commit refusé             ║"
+                    echo "╚══════════════════════════════════════════════════╝"
+                    echo ""
+                fi
+                echo "  📄 $file :"
+                while IFS= read -r line; do
+                    echo "     $line"
+                done < /tmp/precommit_match.$$
+                echo ""
+                FOUND=1
+            fi
+            rm -f /tmp/precommit_match.$$
+            ;;
+    esac
+done
+
+if [ $FOUND -eq 1 ]; then
+    echo "  ℹ️  Utilise un nom de plume ou un pseudonyme."
+    echo "     Corrige les lignes ci-dessus et recommence."
+    echo ""
+    exit 1
+fi
+
+exit 0
