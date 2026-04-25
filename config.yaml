@@ -1,0 +1,72 @@
+# config.yaml — Hugo configuration
+# Le Togo en famille
+
+baseURL: "https://vianney-g.github.io/togo-blog/"
+languageCode: "fr"
+title: "Le Togo en famille"
+theme: "hugo-paper"
+
+# Taxonomies (FR-3)
+taxonomies:
+  author: authors
+  category: categories
+  tag: tags
+
+# Menus
+menu:
+  main:
+    - name: "Auteurs"
+      url: "/authors/"
+      weight: 10
+    - name: "Archives"
+      url: "/archives/"
+      weight: 20
+    - name: "Puits de Jacob"
+      url: "/puits-de-jacob/"
+      weight: 30
+    - name: "À propos"
+      url: "/a-propos/"
+      weight: 40
+
+# Paramètres du site
+params:
+  subtitle: ""
+  color: "#F5F2EB"
+  disableHLJS: true
+
+# Permaliens
+permalinks:
+  posts: "/:year/:month/:slug/"
+  puits-de-jacob: "/puits-de-jacob/:slug/"
+
+# RSS natif (FR-10) — aucune config supplémentaire requise
+# Hugo génère automatiquement /index.xml
+
+# Markup
+markup:
+  goldmark:
+    renderer:
+      unsafe: false
+    extensions:
+      typographer:
+        disable: false
+
+# Build
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+
+# Minification
+minify:
+  disableXML: true
+  minifyOutput: false
+
+# Pagination
+pagination:
+  pagerSize: 20
+
+# Résumés
+summaryLength: 70
+
+# Copyright
+copyright: "Famille — Sokodé, Togo"
