@@ -3,6 +3,11 @@ public/
 resources/
 .hugo_build.lock
 
+# Synced content from togo-blog-content (make sync)
+content/*
+!content/.gitkeep
+static/img/
+
 # OS files
 .DS_Store
 Thumbs.db

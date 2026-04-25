@@ -18,3 +18,5 @@ build: sync
 # Nettoyer les artefacts
 clean:
 	rm -rf public/ resources/
+	find content/ -mindepth 1 -not -path 'content/.gitkeep' -depth -delete 2>/dev/null || true
+	find static/img/ -mindepth 1 -depth -delete 2>/dev/null || true
