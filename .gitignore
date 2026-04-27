@@ -21,3 +21,8 @@ Thumbs.db
 
 # Environment
 .env
+
+# BMAD internal (planning artifacts, stories, dev records)
+_bmad-output/
+_bmad/
+.github/skills/

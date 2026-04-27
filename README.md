@@ -21,14 +21,14 @@ Blog statique Hugo documentant l'aventure de la famille à Sokodé (Togo, 2026).
 
 ## Repos associés
 
-- **Ce repo** (`togo-blog`) : code, thème, CI/CD — le mainteneur seul
-- **Repo content** (`togo-blog-content`) : articles Markdown + images — le mainteneur + la co-autrice
+- **Ce repo** (`togo-blog`) : code, thème, CI/CD
+- **Repo content** (`togo-blog-content`) : articles Markdown + images
 
 ## Développement local
 
 ```bash
-# Cloner avec le thème
-git clone --recurse-submodules git@github.com:vianney-xyz/togo-blog.git
+# Cloner avec le thème (submodule)
+git clone --recurse-submodules <url-du-repo>
 cd togo-blog
 
 # Prévisualiser
