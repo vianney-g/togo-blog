@@ -119,3 +119,15 @@
 .youtube-embed {
   margin: var(--space-m) 0;
 }
+
+/* --- Ornements typographiques --- */
+
+.article-end {
+  text-align: center;
+  margin: var(--space-xl) 0 var(--space-l);
+  color: var(--color-accent-warm);
+}
+
+.fleuron {
+  font-size: 1.5rem;
+}

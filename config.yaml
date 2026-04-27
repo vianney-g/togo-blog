@@ -50,6 +50,10 @@ markup:
     extensions:
       typographer:
         disable: false
+        leftDoubleQuote: "«&nbsp;"
+        rightDoubleQuote: "&nbsp;»"
+        leftSingleQuote: "‹&nbsp;"
+        rightSingleQuote: "&nbsp;›"
 
 # Build
 buildDrafts: false

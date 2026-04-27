@@ -1,0 +1,77 @@
+/* =============================================================================
+ * print.css — Feuille d'impression
+ * =============================================================================
+ * Optimise la mise en page pour l'impression (Ctrl+P).
+ * Masque les éléments de navigation, force fond blanc + texte noir,
+ * affiche les URLs des liens.
+ *
+ * Référence : Epic 5 Story 5.6
+ * ============================================================================= */
+
+@media print {
+  /* --- Masquer les éléments non-imprimables --- */
+  .site-header,
+  .site-nav,
+  .site-footer,
+  .tag-list,
+  .youtube-embed,
+  nav {
+    display: none !important;
+  }
+
+  /* --- Forcer fond blanc + texte noir --- */
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+
+  /* --- Liens : afficher l'URL --- */
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #555;
+  }
+
+  /* Ne pas afficher l'URL pour les liens internes et ancres */
+  a[href^="#"]::after,
+  a[href^="/"]::after {
+    content: none;
+  }
+
+  /* --- Supprimer les décorations --- */
+  a {
+    color: #000 !important;
+    text-decoration: underline;
+  }
+
+  /* --- Marges d'impression --- */
+  @page {
+    margin: 2cm;
+  }
+
+  /* --- Éviter les coupures de page dans les éléments --- */
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+  }
+
+  blockquote, figure, img {
+    page-break-inside: avoid;
+  }
+
+  /* --- Images : taille raisonnable --- */
+  img {
+    max-width: 80% !important;
+    margin: 1em auto;
+  }
+
+  /* --- Ornements : garder le fleuron, masquer l'astérisme --- */
+  .article-end {
+    color: #999;
+  }
+
+  hr::after {
+    color: #999;
+  }
+}
