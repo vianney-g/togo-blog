@@ -1,0 +1,15 @@
+{{/* =============================================================================
+  callout.html — Encadré éditorial (note, aparté, citation longue)
+  =============================================================================
+  Usage : callout Texte /callout
+  ou    : callout type="info" Texte /callout
+
+  Types : (défaut), info, warning
+  Référence : Epic 5 Story 5.5
+  ============================================================================= */}}
+
+{{ $type := .Get "type" | default "default" }}
+
+<aside class="callout callout--{{ $type }}">
+  {{ .Inner | markdownify }}
+</aside>

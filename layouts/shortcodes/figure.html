@@ -1,0 +1,23 @@
+{{/* =============================================================================
+  figure.html — Image avec légende typographiée Asagi-Usuzumi
+  =============================================================================
+  Usage : figure src="/img/2026-08/photo.jpg" caption="Légende"
+  Params optionnels : alt, class
+
+  Surcharge le shortcode natif Hugo pour appliquer le style du blog.
+  Référence : Epic 5 Story 5.5
+  ============================================================================= */}}
+
+{{ $src := .Get "src" }}
+{{ $caption := .Get "caption" }}
+{{ $alt := .Get "alt" | default $caption | default "Image" }}
+{{ $class := .Get "class" | default "" }}
+
+<figure class="figure {{ $class }}">
+  {{ with $src }}
+    <img src="{{ . }}" alt="{{ $alt }}" loading="lazy">
+  {{ end }}
+  {{ with $caption }}
+    <figcaption class="figure__caption">{{ . | markdownify }}</figcaption>
+  {{ end }}
+</figure>
