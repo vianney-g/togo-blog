@@ -1,0 +1,16 @@
+{{/* head-css.html — Pipeline CSS Hugo : concaténation + minification
+     Référence : Epic 5 Story 5.3 */}}
+
+{{ $tokens := resources.Get "css/tokens.css" }}
+{{ $typography := resources.Get "css/typography.css" }}
+{{ $base := resources.Get "css/base.css" }}
+{{ $layout := resources.Get "css/layout.css" }}
+{{ $components := resources.Get "css/components.css" }}
+
+{{ $styles := slice $tokens $typography $base $layout $components | resources.Concat "css/main.css" }}
+
+{{ if hugo.IsProduction }}
+  {{ $styles = $styles | minify | fingerprint }}
+{{ end }}
+
+<link rel="stylesheet" href="{{ $styles.RelPermalink }}">

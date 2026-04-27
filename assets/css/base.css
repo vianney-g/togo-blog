@@ -1,0 +1,109 @@
+/* =============================================================================
+ * base.css — Reset minimal + styles éléments HTML
+ * =============================================================================
+ * Reset léger (pas de normalize.css complet — le thème Paper en fournit un).
+ * Styles des éléments HTML de base conformes à la palette Asagi-Usuzumi.
+ *
+ * Référence : Epic 5 Story 5.3
+ * ============================================================================= */
+
+/* --- Reset minimal --- */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* --- Links --- */
+
+a {
+  color: var(--color-link);
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent-warm);
+  text-underline-offset: 0.15em;
+  text-decoration-thickness: 1px;
+  transition: color 0.15s ease;
+}
+
+a:hover {
+  color: var(--color-link-hover);
+  text-decoration-color: var(--color-link-hover);
+}
+
+/* --- Blockquotes --- */
+
+blockquote {
+  margin: var(--space-m) 0;
+  padding: var(--space-xs) var(--space-m);
+  border-left: 3px solid var(--color-accent-cold);
+  font-style: italic;
+  color: var(--color-text-muted);
+}
+
+blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* --- Lists --- */
+
+ul, ol {
+  padding-left: var(--space-m);
+  margin-bottom: var(--space-m);
+}
+
+li {
+  margin-bottom: var(--space-2xs);
+}
+
+/* --- Horizontal rule --- */
+
+hr {
+  border: none;
+  text-align: center;
+  margin: var(--space-xl) 0;
+  color: var(--color-text-muted);
+}
+
+hr::after {
+  content: "⁂";
+  font-size: 1.5rem;
+  letter-spacing: 0.5em;
+}
+
+/* --- Code --- */
+
+code {
+  font-size: 0.875em;
+  background-color: var(--color-bg-secondary);
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+}
+
+pre {
+  background-color: var(--color-bg-secondary);
+  padding: var(--space-s);
+  overflow-x: auto;
+  border-radius: 4px;
+  margin-bottom: var(--space-m);
+}
+
+pre code {
+  background: none;
+  padding: 0;
+}

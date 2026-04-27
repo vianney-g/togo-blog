@@ -1,0 +1,101 @@
+/* =============================================================================
+ * layout.css — Structure de page responsive (mobile-first)
+ * =============================================================================
+ * Layout en colonne unique centrée. Flexbox pour header/main/footer.
+ * Mobile-first : styles de base = mobile, media queries = tablet + desktop.
+ *
+ * Référence : Epic 5 Story 5.3
+ * ============================================================================= */
+
+/* --- Page structure --- */
+
+.site {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.site-main {
+  flex: 1;
+  width: 100%;
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: var(--space-s);
+}
+
+/* --- Header --- */
+
+.site-header {
+  padding: var(--space-m) var(--space-s);
+  text-align: center;
+}
+
+.site-title {
+  font-family: var(--font-serif);
+  font-size: var(--text-h4);
+  font-weight: 500;
+  margin: 0;
+}
+
+.site-title a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.site-title a:hover {
+  color: var(--color-accent-cold-strong);
+}
+
+.site-nav {
+  margin-top: var(--space-xs);
+}
+
+.site-nav a {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  margin: 0 var(--space-xs);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.site-nav a:hover {
+  color: var(--color-link);
+}
+
+/* --- Footer --- */
+
+.site-footer {
+  padding: var(--space-l) var(--space-s);
+  text-align: center;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: var(--color-text-faint);
+  border-top: 1px solid var(--color-border);
+  margin-top: var(--space-2xl);
+}
+
+/* --- Tablet (≥ 640px) --- */
+
+@media (min-width: 640px) {
+  .site-main {
+    padding: var(--space-m);
+  }
+
+  .site-header {
+    padding: var(--space-l) var(--space-m);
+  }
+}
+
+/* --- Desktop (≥ 960px) --- */
+
+@media (min-width: 960px) {
+  .site-main {
+    padding: var(--space-l) var(--space-m);
+  }
+
+  .site-header {
+    padding: var(--space-xl) var(--space-m);
+  }
+}
