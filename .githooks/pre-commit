@@ -15,6 +15,10 @@ set -e
 # Inclut les variantes avec/sans accent pour Joséphine
 FORBIDDEN='Vianney|Tiphaine|Jeanne|Jos[eé]phine|Mayeul|Marthe'
 
+# --- Répertoires exclus du scan ---
+# Fichiers internes de planning (contiennent légitimement des prénoms)
+EXCLUDED_PATHS='_bmad-output/'
+
 # --- Fichiers staged (ajoutés, copiés, modifiés) ---
 STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM 2>/dev/null || true)
 
@@ -27,6 +31,11 @@ fi
 FOUND=0
 
 for file in $STAGED_FILES; do
+    # Exclure les répertoires internes de planning
+    case "$file" in
+        $EXCLUDED_PATHS*) continue ;;
+    esac
+
     # Ne scanner que les fichiers texte pertinents
     case "$file" in
         *.md|*.yaml|*.yml|*.toml|*.txt|*.json)
