@@ -1,0 +1,40 @@
+/* =============================================================================
+ * dark.css — Mode sombre automatique (prefers-color-scheme)
+ * =============================================================================
+ * Override des tokens sémantiques pour le mode sombre.
+ * Activé automatiquement par le système — aucun toggle UI au MVP.
+ *
+ * Stratégie : inverser les rôles des couleurs.
+ *   - Fond : sumi-doux (#1A1D21) au lieu de washi
+ *   - Texte : washi-ombre (#E8E4DB) au lieu de sumi
+ *   - Accents : variantes claires pour le texte, foncées pour les ornements
+ *
+ * Référence : Epic 5 Story 5.4
+ * ============================================================================= */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* --- Override tokens sémantiques --- */
+    --color-bg:             var(--color-sumi-doux);       /* #1A1D21 */
+    --color-bg-secondary:   #252830;                       /* légèrement plus clair que sumi-doux */
+    --color-text:           var(--color-washi-ombre);      /* #E8E4DB */
+    --color-text-muted:     var(--color-usuzumi-clair);    /* #9BA5AE */
+    --color-text-faint:     var(--color-usuzumi);          /* #6E7A85 */
+    --color-link:           var(--color-kobaicha);         /* #D9B8AB — plus clair pour lisibilité */
+    --color-link-hover:     var(--color-washi);            /* #F5F2EB */
+    --color-accent-cold:    var(--color-asagi-fonce);      /* #7BA7C2 — plus visible sur fond sombre */
+    --color-accent-cold-strong: var(--color-asagi-iro);    /* #C1D6E3 */
+    --color-accent-warm:    var(--color-kobaicha-fonce);   /* #8B4A3A */
+    --color-border:         #3A3D45;                       /* bordure subtile sur fond sombre */
+  }
+
+  /* --- Images : légère réduction de luminosité pour confort --- */
+  img {
+    opacity: 0.92;
+    transition: opacity 0.2s ease;
+  }
+
+  img:hover {
+    opacity: 1;
+  }
+}

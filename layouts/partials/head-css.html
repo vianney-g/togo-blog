@@ -6,8 +6,9 @@
 {{ $base := resources.Get "css/base.css" }}
 {{ $layout := resources.Get "css/layout.css" }}
 {{ $components := resources.Get "css/components.css" }}
+{{ $dark := resources.Get "css/dark.css" }}
 
-{{ $styles := slice $tokens $typography $base $layout $components | resources.Concat "css/main.css" }}
+{{ $styles := slice $tokens $typography $base $layout $components $dark | resources.Concat "css/main.css" }}
 
 {{ if hugo.IsProduction }}
   {{ $styles = $styles | minify | fingerprint }}
