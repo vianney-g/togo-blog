@@ -1,0 +1,147 @@
+/* =============================================================================
+ * typography.css — Typographie EB Garamond + Inter
+ * =============================================================================
+ * EB Garamond : corps de texte, titres, citations (serif littéraire)
+ * Inter : métadonnées, dates, navigation, UI (sans-serif fonctionnel)
+ *
+ * Type scale : Perfect Fourth (ratio 1.333)
+ * Base : 18px (1.125rem) sur mobile, 18px sur desktop
+ *
+ * Référence : PRD FR-2, Epic 5, UX Spec §Typography System
+ * ============================================================================= */
+
+/* --- @font-face declarations --- */
+
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/eb-garamond-v27-latin-regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/eb-garamond-v27-latin-italic.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/eb-garamond-v27-latin-500.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/inter-v18-latin-regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/inter-v18-latin-500.woff2') format('woff2');
+}
+
+/* --- Font stacks --- */
+
+:root {
+  --font-serif: 'EB Garamond', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Inter', -apple-system, system-ui, 'Segoe UI', sans-serif;
+}
+
+/* --- Type scale — Perfect Fourth (1.333) --- */
+/* Base: 1.125rem (18px)
+ * h6: 1.125rem (18px)   — base
+ * h5: 1.5rem   (24px)   — base × 1.333
+ * h4: 2rem     (32px)   — base × 1.333²
+ * h3: 2.665rem (42.6px) — base × 1.333³
+ * h2: 3.553rem (56.8px) — base × 1.333⁴
+ * h1: 4.736rem (75.8px) — base × 1.333⁵
+ */
+
+:root {
+  --text-base:  1.125rem;
+  --text-h6:    1.125rem;
+  --text-h5:    1.5rem;
+  --text-h4:    2rem;
+  --text-h3:    2.665rem;
+  --text-h2:    3.553rem;
+  --text-h1:    4.736rem;
+}
+
+/* --- Body typography --- */
+
+body {
+  font-family: var(--font-serif);
+  font-size: var(--text-base);
+  line-height: 1.7;
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Headings --- */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--color-text);
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-s);
+}
+
+h1 { font-size: var(--text-h1); }
+h2 { font-size: var(--text-h2); }
+h3 { font-size: var(--text-h3); }
+h4 { font-size: var(--text-h4); }
+h5 { font-size: var(--text-h5); }
+h6 { font-size: var(--text-h6); }
+
+/* Scale down headings on mobile */
+@media (max-width: 639px) {
+  h1 { font-size: calc(var(--text-h1) * 0.65); }
+  h2 { font-size: calc(var(--text-h2) * 0.7); }
+  h3 { font-size: calc(var(--text-h3) * 0.75); }
+}
+
+/* --- Sans-serif elements (Inter) --- */
+
+nav,
+.meta,
+.date,
+.tags,
+.author-name,
+time,
+figcaption,
+footer {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;  /* 14px */
+  letter-spacing: 0.01em;
+}
+
+/* --- Paragraphs --- */
+
+p {
+  margin-bottom: var(--space-m);
+  max-width: var(--content-max-width);
+}
+
+/* --- Reading column constraint --- */
+
+.content,
+article {
+  max-width: var(--content-max-width);
+  margin-left: auto;
+  margin-right: auto;
+}
