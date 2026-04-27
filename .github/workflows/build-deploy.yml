@@ -1,0 +1,109 @@
+# =============================================================================
+# build-deploy.yml — Build Hugo + Deploy GitHub Pages
+# =============================================================================
+# Ce workflow build le site Hugo et le déploie sur GitHub Pages.
+# Il est déclenché par :
+#   1. repository_dispatch depuis le repo content (via validate.yml)
+#   2. Push sur main (changements thème/config)
+#   3. workflow_dispatch manuel (secours)
+#
+# Référence : Architecture §6 C6b
+# =============================================================================
+
+name: Build & Deploy
+
+on:
+  repository_dispatch:
+    types: [content-updated]
+  push:
+    branches: [main]
+  workflow_dispatch:  # Trigger manuel de secours
+
+# Permissions nécessaires pour GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Un seul déploiement à la fois
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: "Build Hugo"
+    runs-on: ubuntu-latest
+    steps:
+      # --- Checkout code (avec submodule thème Paper) ---
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      # --- Checkout content depuis le repo séparé ---
+      - name: Checkout content
+        uses: actions/checkout@v4
+        with:
+          repository: vianney-g/togo-blog-content
+          path: content-repo
+          token: ${{ secrets.CONTENT_READ_PAT }}
+
+      # --- Merge content dans l'arborescence Hugo ---
+      - name: Merge content
+        run: |
+          # Copier le contenu éditorial dans l'arborescence Hugo
+          if [ -d "content-repo/content" ]; then
+            cp -r content-repo/content/* content/ 2>/dev/null || true
+          fi
+          if [ -d "content-repo/static" ]; then
+            mkdir -p static
+            cp -r content-repo/static/* static/ 2>/dev/null || true
+          fi
+
+          # Log pour debug
+          echo "=== Contenu mergé ==="
+          echo "Articles :"
+          find content/ -name "*.md" -not -name "_index.md" | wc -l
+          echo "Images :"
+          find static/img/ -type f 2>/dev/null | wc -l || echo "0"
+
+      # --- Setup Hugo ---
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.120.4'
+          extended: true
+
+      # --- Configure Pages (pour obtenir base_url) ---
+      - name: Configure Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      # --- Build ---
+      - name: Build Hugo
+        env:
+          HUGO_ENVIRONMENT: production
+          HUGO_MINIFY_TDEWOLFF_HTML_KEEPCOMMENTS: false
+        run: |
+          hugo --minify --gc \
+            --baseURL "${{ steps.pages.outputs.base_url || 'https://vianney-g.github.io/togo-blog/' }}"
+
+      # --- Upload artifact pour le déploiement ---
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./public
+
+  deploy:
+    name: "Deploy to GitHub Pages"
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -45,7 +45,8 @@ for file in $STAGED_FILES; do
             fi
 
             # Chercher les prénoms (case-insensitive, word-boundary)
-            if grep -nEi "\b($FORBIDDEN)\b" "$file" > /tmp/precommit_match.$$ 2>/dev/null; then
+            # Exclure les URLs/refs GitHub (username vianney-g n'est pas un prénom)
+            if grep -nEi "\b($FORBIDDEN)\b" "$file" | grep -vE '(github\.(com|io)|\.git\b|vianney-g)' > /tmp/precommit_match.$$ 2>/dev/null && [ -s /tmp/precommit_match.$$ ]; then
                 if [ $FOUND -eq 0 ]; then
                     echo ""
                     echo "╔══════════════════════════════════════════════════╗"
