@@ -1,0 +1,32 @@
+{{ define "main" }}
+{{/*
+  archives.html — Index chronologique complet de tous les articles
+  =============================================================================
+  Affiche TOUS les articles (posts + puits-de-jacob) groupés par mois/année,
+  ordre chronologique inversé. Pas de pagination : sommaire complet.
+
+  Référence : Story 6.4, AC1-AC4
+*/}}
+<div class="archives">
+  <h1 class="archives__title">{{ .Title }}</h1>
+
+  {{ $posts := where .Site.RegularPages "Section" "posts" }}
+  {{ $puits := where .Site.RegularPages "Section" "puits-de-jacob" }}
+  {{ $allPages := union $posts $puits }}
+
+  {{ range $allPages.GroupByDate "January 2006" }}
+  <section class="archives__month">
+    <h2 class="archives__month-heading">{{ .Key }}</h2>
+    <ul class="archives__list">
+      {{ range .Pages }}
+      <li class="archives__entry">
+        <time class="archives__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02 Jan" }}</time>
+        <a class="archives__link" href="{{ .RelPermalink }}">{{ .Title }}</a>
+        {{ with .Params.author }}<span class="archives__author">— {{ . }}</span>{{ end }}
+      </li>
+      {{ end }}
+    </ul>
+  </section>
+  {{ end }}
+</div>
+{{ end }}
