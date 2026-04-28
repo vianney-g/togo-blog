@@ -15,7 +15,7 @@
 
 <figure class="figure {{ $class }}">
   {{ with $src }}
-    <img src="{{ . }}" alt="{{ $alt }}" loading="lazy">
+    <img src="{{ . | strings.TrimLeft "/" | relURL }}" alt="{{ $alt }}" loading="lazy">
   {{ end }}
   {{ with $caption }}
     <figcaption class="figure__caption">{{ . | markdownify }}</figcaption>

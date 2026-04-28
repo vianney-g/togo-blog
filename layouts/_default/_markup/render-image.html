@@ -1,0 +1,25 @@
+{{/* =============================================================================
+  render-image.html — Render hook pour les images Markdown
+  =============================================================================
+  Applique relURL aux chemins d'images pour gérer le baseURL (/togo-blog/).
+  Les images insérées en Markdown standard (![alt](/img/photo.jpg)) passent
+  par ce hook automatiquement.
+
+  Note : relURL ne préfixe pas les chemins commençant par "/" — on les traite
+  en supprimant le slash initial avant d'appliquer relURL.
+
+  Référence : https://gohugo.io/render-hooks/images/
+  ============================================================================= */}}
+
+{{- $src := .Destination | strings.TrimLeft "/" | relURL -}}
+{{- $alt := .Text -}}
+{{- $title := .Title -}}
+
+<figure class="figure">
+  <img src="{{ $src }}" alt="{{ $alt }}" loading="lazy"
+    {{- with $title }} title="{{ . }}"{{ end -}}
+  >
+  {{- with $alt }}
+  <figcaption class="figure__caption">{{ . }}</figcaption>
+  {{- end }}
+</figure>
