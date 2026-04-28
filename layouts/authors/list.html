@@ -2,7 +2,8 @@
 {{/*
   list.html — Liste de tous les auteurs
   =============================================================================
-  Affiche chaque auteur avec emoji, nom, description courte et nombre d'articles.
+  Affiche chaque auteur avec icône SVG, nom, description courte et nombre d'articles.
+  L'icône est placée inline avant le titre pour une meilleure cohérence visuelle.
 
   Référence : Story 6.3, AC5
 */}}
@@ -15,8 +16,12 @@
   {{ $authorPage := $.Site.GetPage (printf "/auteurs/%s" (lower $termName)) }}
   <div class="author-card">
     {{ with $authorPage }}
-      <span class="author-card__emoji">{{ .Params.emoji }}</span>
-      <h2 class="author-card__name">{{ .Title }}</h2>
+      <h2 class="author-card__name">
+        {{- with .Params.icon -}}
+          <span class="author-card__icon">{{ partial "author-icon.html" . }}</span>
+        {{- end -}}
+        {{ .Title }}
+      </h2>
       <p class="author-card__desc">{{ .Params.description }}</p>
     {{ else }}
       <h2 class="author-card__name">{{ $termName }}</h2>

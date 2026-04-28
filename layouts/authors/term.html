@@ -2,7 +2,7 @@
 {{/*
   term.html — Page auteur individuelle (taxonomy term)
   =============================================================================
-  Affiche le profil de l'auteur (emoji, pseudonyme, bio) puis la liste
+  Affiche le profil de l'auteur (icône SVG, pseudonyme, bio) puis la liste
   de ses articles en ordre chronologique inversé.
 
   Référence : Story 6.3, AC1-AC4
@@ -14,10 +14,14 @@
 
 <div class="archives">
   <header class="author-page__header">
-    {{ with $authorPage }}
-      <span class="author-page__emoji">{{ .Params.emoji }}</span>
-    {{ end }}
-    <h1 class="archives__title">Articles de {{ $authorName }}</h1>
+    <h1 class="archives__title">
+      {{- with $authorPage -}}
+        {{- with .Params.icon -}}
+          <span class="author-page__icon">{{ partial "author-icon.html" . }}</span>
+        {{- end -}}
+      {{- end -}}
+      Articles de {{ $authorName }}
+    </h1>
   </header>
 
   {{ range .Pages.ByDate.Reverse.GroupByDate "January 2006" }}

@@ -374,13 +374,25 @@ a.tag:hover {
   border-bottom: none;
 }
 
-.author-card__emoji {
-  font-size: 2rem;
+/* --- Author icon (SVG inline) --- */
+
+.author-icon {
+  width: 1.2em;
+  height: 1.2em;
+  vertical-align: -0.15em;
+  display: inline-block;
+  color: currentColor;
+}
+
+.author-card__icon {
+  margin-right: 0.3em;
 }
 
 .author-card__name {
   font-family: var(--font-serif);
   margin: var(--space-2xs) 0;
+  display: flex;
+  align-items: center;
 }
 
 .author-card__name a {
@@ -408,10 +420,14 @@ a.tag:hover {
   text-decoration: underline;
 }
 
-.author-page__emoji {
-  font-size: 3rem;
-  display: block;
-  margin-bottom: var(--space-s);
+.author-page__icon {
+  margin-right: 0.3em;
+}
+
+.author-page__icon .author-icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.1em;
 }
 
 .author-page__bio {

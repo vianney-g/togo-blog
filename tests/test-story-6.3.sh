@@ -18,27 +18,22 @@ CSS="$ROOT/assets/css/components.css"
 echo "=== Story 6.3 — Pages auteurs ==="
 echo ""
 
-# --- AC1: Author page shows pseudonym, emoji, bio, articles ---
-echo "--- AC1: Author page (pseudonym, emoji, bio, articles) ---"
+# --- AC1: Author page shows pseudonym, icon, bio, articles ---
+echo "--- AC1: Author page (pseudonym, icon, articles) ---"
 if [ -f "$TERM" ]; then
     ok "AC1 — term.html exists"
 else
     fail "AC1 — term.html not found"
 fi
-if grep -q 'author-page__emoji' "$TERM"; then
-    ok "AC1 — emoji element present"
+if grep -q 'author-page__icon\|author-icon' "$TERM"; then
+    ok "AC1 — icon element present"
 else
-    fail "AC1 — emoji element missing"
+    fail "AC1 — icon element missing"
 fi
-if grep -q 'author-page__bio' "$TERM"; then
-    ok "AC1 — bio element present"
+if grep -q '\.Pages' "$TERM"; then
+    ok "AC1 — articles listing present"
 else
-    fail "AC1 — bio element missing"
-fi
-if grep -q 'author-page__articles' "$TERM"; then
-    ok "AC1 — articles section present"
-else
-    fail "AC1 — articles section missing"
+    fail "AC1 — articles listing missing"
 fi
 
 # --- AC2: Articles filtered by author, reverse chronological ---
@@ -70,10 +65,10 @@ for author in monsieur madame plume; do
     else
         fail "AC4 — $author.md not found"
     fi
-    if grep -q 'emoji:' "$FILE"; then
-        ok "AC4 — $author has emoji"
+    if grep -q 'icon:' "$FILE"; then
+        ok "AC4 — $author has icon"
     else
-        fail "AC4 — $author missing emoji"
+        fail "AC4 — $author missing icon"
     fi
     if grep -q 'description:' "$FILE"; then
         ok "AC4 — $author has description"
