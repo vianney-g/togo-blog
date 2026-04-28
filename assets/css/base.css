@@ -4,8 +4,40 @@
  * Reset léger (pas de normalize.css complet — le thème Paper en fournit un).
  * Styles des éléments HTML de base conformes à la palette Asagi-Usuzumi.
  *
+ * STRATEGY — Override Paper's CSS custom properties
+ * Instead of fighting Tailwind v4's :not(#\#) specificity hack on every
+ * selector, we redefine Paper's own CSS variables at matching specificity.
+ * Paper's rules automatically use our palette through the variable chain.
+ *
+ * Paper defines --color-black/#000 and --color-white/#fff at :root:not(#\#).
+ * We override them at the same specificity — source order (our CSS loads
+ * after Paper's) guarantees our definitions win.
+ *
  * Référence : Epic 5 Story 5.3
  * ============================================================================= */
+
+/* =============================================================================
+ * Paper variable overrides — ROOT LEVEL
+ * Paper's Tailwind CSS defines --color-black, --color-white, --default-font-family
+ * at :root:not(#\#) with specificity (1,0,1). We match that specificity;
+ * since our stylesheet loads AFTER Paper's, source order makes us win.
+ * ============================================================================= */
+
+:root:not(#\#) {
+  /* Override Tailwind's black/white used throughout Paper's utilities */
+  --color-black: var(--color-text);           /* our sumi instead of pure black */
+  --color-white: var(--color-bg);             /* our washi instead of pure white */
+
+  /* Override Tailwind's default font stack and sans-serif */
+  --font-sans: var(--font-sans-stack);
+  --default-font-family: var(--font-serif);
+}
+
+/* Dark mode: adjust Paper's variables for our dark palette */
+:root.dark:not(#\#) {
+  --color-black: var(--color-bg);             /* dark bg as "black" base */
+  --color-white: var(--color-text);           /* dark text as "white" */
+}
 
 /* --- Reset minimal --- */
 
@@ -30,9 +62,35 @@ img {
   display: block;
 }
 
-/* --- Links --- */
+/* =============================================================================
+ * Tailwind v4 specificity overrides
+ * For rules where we need to set DIFFERENT values than what Paper's
+ * variables would give us. Most color issues are now handled by the
+ * variable overrides above, but these handle structural differences.
+ * ============================================================================= */
 
-a {
+/* --- Article: ensure our text color (not Paper's --color-black) ---
+ * article:not(#\#)×5 { color: var(--color-black) } → now resolves to our text */
+article:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  color: var(--color-text);
+}
+
+article:where(.dark,.dark *):not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  color: var(--color-text);
+}
+
+/* --- Headings: override font-weight from Paper's semibold to medium --- */
+h1:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#),
+h2:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#),
+h3:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+/* --- Links: override Tailwind reset a { color: inherit } ---
+ * Tailwind: a:not(#\#):not(#\#) { color: inherit } → spec (2,0,1)
+ * We need (3,0,1) to win. */
+a:not(#\#):not(#\#):not(#\#) {
   color: var(--color-link);
   text-decoration: underline;
   text-decoration-color: var(--color-accent-warm);
@@ -41,10 +99,82 @@ a {
   transition: color 0.15s ease;
 }
 
-a:hover {
+a:not(#\#):not(#\#):not(#\#):hover {
   color: var(--color-link-hover);
   text-decoration-color: var(--color-link-hover);
 }
+
+/* --- Header/nav links: text color, not link color --- */
+header a:not(#\#):not(#\#):not(#\#) {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+header a:not(#\#):not(#\#):not(#\#):hover {
+  color: var(--color-accent-cold-strong);
+}
+
+/* Nav links: muted text color */
+.nav-wrapper a:not(#\#):not(#\#):not(#\#) {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.nav-wrapper a:not(#\#):not(#\#):not(#\#):hover {
+  color: var(--color-link);
+}
+
+/* --- Prose: remap Tailwind Typography colors to Asagi-Usuzumi palette ---
+ * .prose:not(#\#)×4 sets --tw-prose-* vars → specificity (4,1,0)
+ * We use 5× to exceed. */
+.prose:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  --tw-prose-body: var(--color-text);
+  --tw-prose-headings: var(--color-text);
+  --tw-prose-lead: var(--color-text-muted);
+  --tw-prose-links: var(--color-link);
+  --tw-prose-bold: var(--color-text);
+  --tw-prose-counters: var(--color-text-muted);
+  --tw-prose-bullets: var(--color-accent-cold);
+  --tw-prose-hr: var(--color-border);
+  --tw-prose-quotes: var(--color-text);
+  --tw-prose-quote-borders: var(--color-accent-cold);
+  --tw-prose-captions: var(--color-text-muted);
+  --tw-prose-kbd: var(--color-text);
+  --tw-prose-kbd-shadows: transparent;
+  --tw-prose-code: var(--color-text);
+  --tw-prose-pre-code: var(--color-text);
+  --tw-prose-pre-bg: var(--color-bg-secondary);
+  --tw-prose-th-borders: var(--color-border);
+  --tw-prose-td-borders: var(--color-border);
+  /* Invert variants (used by dark mode if prose-invert is active) */
+  --tw-prose-invert-body: var(--color-text);
+  --tw-prose-invert-headings: var(--color-text);
+  --tw-prose-invert-lead: var(--color-text-muted);
+  --tw-prose-invert-links: var(--color-link);
+  --tw-prose-invert-bold: var(--color-text);
+  --tw-prose-invert-counters: var(--color-text-muted);
+  --tw-prose-invert-bullets: var(--color-accent-cold);
+  --tw-prose-invert-hr: var(--color-border);
+  --tw-prose-invert-quotes: var(--color-text);
+  --tw-prose-invert-quote-borders: var(--color-accent-cold);
+  --tw-prose-invert-captions: var(--color-text-muted);
+  --tw-prose-invert-kbd: var(--color-text);
+  --tw-prose-invert-kbd-shadows: transparent;
+  --tw-prose-invert-code: var(--color-text);
+  --tw-prose-invert-pre-code: var(--color-text);
+  --tw-prose-invert-pre-bg: var(--color-bg-secondary);
+  --tw-prose-invert-th-borders: var(--color-border);
+  --tw-prose-invert-td-borders: var(--color-border);
+  /* Override prose body color directly */
+  color: var(--color-text);
+}
+
+/* =============================================================================
+ * Standard element styles
+ * These apply where Tailwind utilities don't have competing rules.
+ * ============================================================================= */
 
 /* --- Blockquotes --- */
 

@@ -1,40 +1,52 @@
 /* =============================================================================
- * dark.css — Mode sombre automatique (prefers-color-scheme)
+ * dark.css — Mode sombre via classe .dark (compatible Paper toggle)
  * =============================================================================
- * Override des tokens sémantiques pour le mode sombre.
- * Activé automatiquement par le système — aucun toggle UI au MVP.
+ * Paper's JS (header.html) adds/removes .dark on <html> based on:
+ *   1. System preference (prefers-color-scheme)
+ *   2. Manual toggle button
+ *   3. localStorage persistence
+ *
+ * We override our semantic tokens on :root.dark so everything updates
+ * automatically through the CSS custom property chain.
  *
  * Stratégie : inverser les rôles des couleurs.
- *   - Fond : sumi-doux (#1A1D21) au lieu de washi
- *   - Texte : washi-ombre (#E8E4DB) au lieu de sumi
+ *   - Fond : sumi-doux au lieu de washi
+ *   - Texte : washi-ombre au lieu de sumi
  *   - Accents : variantes claires pour le texte, foncées pour les ornements
  *
  * Référence : Epic 5 Story 5.4
  * ============================================================================= */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* --- Override tokens sémantiques --- */
-    --color-bg:             var(--color-sumi-doux);       /* #1A1D21 */
-    --color-bg-secondary:   #252830;                       /* légèrement plus clair que sumi-doux */
-    --color-text:           var(--color-washi-ombre);      /* #E8E4DB */
-    --color-text-muted:     var(--color-usuzumi-clair);    /* #9BA5AE */
-    --color-text-faint:     var(--color-usuzumi);          /* #6E7A85 */
-    --color-link:           var(--color-kobaicha);         /* #D9B8AB — plus clair pour lisibilité */
-    --color-link-hover:     var(--color-washi);            /* #F5F2EB */
-    --color-accent-cold:    var(--color-asagi-fonce);      /* #7BA7C2 — plus visible sur fond sombre */
-    --color-accent-cold-strong: var(--color-asagi-iro);    /* #C1D6E3 */
-    --color-accent-warm:    var(--color-kobaicha-fonce);   /* #8B4A3A */
-    --color-border:         #3A3D45;                       /* bordure subtile sur fond sombre */
-  }
+:root.dark {
+  /* --- Override tokens sémantiques --- */
+  --color-bg:             var(--color-sumi-doux);
+  --color-bg-secondary:   var(--color-sumi-cendre);
+  --color-text:           var(--color-washi-ombre);
+  --color-text-muted:     var(--color-usuzumi-clair);
+  --color-text-faint:     var(--color-usuzumi);
+  --color-link:           var(--color-kobaicha);         /* plus clair pour lisibilité */
+  --color-link-hover:     var(--color-washi);
+  --color-accent-cold:    var(--color-asagi-fonce);      /* plus visible sur fond sombre */
+  --color-accent-cold-strong: var(--color-asagi-iro);
+  --color-accent-warm:    var(--color-kobaicha-fonce);
+  --color-border:         var(--color-sumi-bordure);
+}
 
-  /* --- Images : légère réduction de luminosité pour confort --- */
-  img {
-    opacity: 0.92;
-    transition: opacity 0.2s ease;
-  }
+/* --- Neutralize Paper's dark overlay pseudo-element ---
+ * Paper creates a fixed ::before on body with bg-black/85 in dark mode.
+ * Since we handle dark background via --color-bg, this overlay would
+ * make the page too dark. We make it transparent.
+ * Specificity matches Tailwind v4: body + 5× :not(#\#) + ::before */
+body:where(.dark,.dark *):not(#\#):not(#\#):not(#\#):not(#\#):not(#\#)::before {
+  background-color: transparent;
+}
 
-  img:hover {
-    opacity: 1;
-  }
+/* --- Images : légère réduction de luminosité pour confort --- */
+.dark img {
+  opacity: 0.92;
+  transition: opacity 0.2s ease;
+}
+
+.dark img:hover {
+  opacity: 1;
 }

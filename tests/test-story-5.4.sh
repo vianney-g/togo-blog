@@ -17,13 +17,14 @@ HEAD_CSS="$ROOT/layouts/partials/head-css.html"
 echo "=== Story 5.4 — Mode sombre automatique ==="
 echo ""
 
-# --- AC1: dark.css exists with prefers-color-scheme ---
+# --- AC1: dark.css exists with .dark class selector ---
+# (Paper's JS handles prefers-color-scheme detection and adds .dark to <html>)
 echo "--- AC1: Fond sumi foncé et texte washi crème ---"
 if [ -f "$DARK" ]; then
-    if grep -q 'prefers-color-scheme: dark' "$DARK"; then
-        ok "AC1 — dark.css contains @media (prefers-color-scheme: dark)"
+    if grep -q ':root\.dark' "$DARK" || grep -q '\.dark' "$DARK"; then
+        ok "AC1 — dark.css uses .dark class selector (Paper JS handles system pref)"
     else
-        fail "AC1 — missing prefers-color-scheme media query"
+        fail "AC1 — missing .dark class selector"
     fi
     if grep -q 'color-sumi-doux' "$DARK" && grep -q 'color-washi-ombre' "$DARK"; then
         ok "AC1 — bg=sumi-doux, text=washi-ombre tokens present"
@@ -54,14 +55,15 @@ else
     fail "AC3 — accent variants not properly inverted"
 fi
 
-# --- AC4: Mode clair par défaut (no forced dark) ---
+# --- AC4: Mode clair par défaut — dark only via .dark class ---
 echo ""
 echo "--- AC4: Mode clair par défaut ---"
-count=$(grep -c '@media.*prefers-color-scheme' "$DARK")
-if [ "$count" -eq 1 ]; then
-    ok "AC4 — single @media prefers-color-scheme block (no forced dark)"
+# Dark styles are scoped under :root.dark or .dark — light is the default
+count=$(grep -c ':root\.dark' "$DARK")
+if [ "$count" -ge 1 ]; then
+    ok "AC4 — dark styles scoped under :root.dark (light is default)"
 else
-    fail "AC4 — expected 1 prefers-color-scheme, found $count"
+    fail "AC4 — expected :root.dark selector, found none"
 fi
 
 # --- AC5: Pas de toggle UI ---

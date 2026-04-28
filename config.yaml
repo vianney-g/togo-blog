@@ -31,7 +31,7 @@ menu:
 # Paramètres du site
 params:
   subtitle: ""
-  color: "#F5F2EB"
+  # color removed — handled by CSS tokens (--color-bg in tokens.css)
   disableHLJS: true
 
 # Permaliens

@@ -27,6 +27,10 @@
   --color-kobaicha:       #D9B8AB;  /* accent chaud — ornements */
   --color-kobaicha-fonce: #8B4A3A;  /* accent chaud renforcé — liens */
 
+  /* --- Dark-mode only palette --- */
+  --color-sumi-cendre:    #252830;  /* fond secondaire mode sombre */
+  --color-sumi-bordure:   #3A3D45;  /* bordure subtile mode sombre */
+
   /* --- Mapping sémantique (mode clair) --- */
   --color-bg:             var(--color-washi);
   --color-bg-secondary:   var(--color-washi-ombre);
