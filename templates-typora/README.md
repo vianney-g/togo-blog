@@ -20,6 +20,6 @@ Ces fichiers sont des modèles prêts à copier pour créer un nouvel article.
 ## Rappels importants
 
 - **Nom de plume** : utilise toujours ton pseudonyme (ex: madame), JAMAIS ton vrai prénom
-- **Catégories possibles** : quotidien, puits-de-jacob, coulisses-vsi, ce2, memoire
+- **Catégories possibles** : quotidien, coulisses-vsi, ce2, memoire
 - **Tags** : libres, mets ce que tu veux (ex: sokode, marche, cuisine, ecole)
 - **Date** : garde le format `2026-08-15T10:00:00+01:00` (change juste le jour/mois)

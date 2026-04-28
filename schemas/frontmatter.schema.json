@@ -43,7 +43,7 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": ["quotidien", "puits-de-jacob", "coulisses-vsi", "ce2", "memoire"]
+        "enum": ["quotidien", "coulisses-vsi", "ce2", "memoire"]
       },
       "uniqueItems": true,
       "description": "Catégories fermées (enum). Empêche la prolifération."

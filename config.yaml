@@ -21,12 +21,9 @@ menu:
     - name: "Archives"
       url: "/archives/"
       weight: 20
-    - name: "Puits de Jacob"
-      url: "/puits-de-jacob/"
-      weight: 30
     - name: "À propos"
       url: "/a-propos/"
-      weight: 40
+      weight: 30
 
 # Paramètres du site
 params:
@@ -37,7 +34,6 @@ params:
 # Permaliens
 permalinks:
   posts: "/:year/:month/:slug/"
-  puits-de-jacob: "/puits-de-jacob/:slug/"
 
 # RSS natif (FR-10) — aucune config supplémentaire requise
 # Hugo génère automatiquement /index.xml

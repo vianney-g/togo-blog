@@ -161,13 +161,13 @@ else
     fail "DoD — hardcoded colors found in template"
 fi
 
-# --- DoD: Articles from posts/ and puits-de-jacob/ ---
+# --- DoD: Articles from posts/ ---
 echo ""
-echo "--- DoD: Multi-section content ---"
-if grep -q 'posts' "$INDEX" && grep -q 'puits-de-jacob' "$INDEX"; then
-    ok "DoD — includes both posts and puits-de-jacob sections"
+echo "--- DoD: Content section ---"
+if grep -q 'posts' "$INDEX"; then
+    ok "DoD — includes posts section"
 else
-    fail "DoD — not including both content sections"
+    fail "DoD — posts section not found"
 fi
 
 # --- DoD: Uses existing article-card component ---
@@ -187,7 +187,6 @@ TEMP_CONTENT=false
 if [ ! -d "$ROOT/content/posts" ]; then
     TEMP_CONTENT=true
     mkdir -p "$ROOT/content/posts"
-    mkdir -p "$ROOT/content/puits-de-jacob"
     cat > "$ROOT/content/_index.md" << 'EOMD'
 ---
 title: "Le Togo en famille"
@@ -204,15 +203,6 @@ summary: "Résumé de l'article test ${i} pour vérifier la page d'accueil."
 Contenu de l'article test ${i}.
 EOMD
     done
-    cat > "$ROOT/content/puits-de-jacob/2026-03-15-puits-test.md" << 'EOMD'
----
-title: "Article Puits de Jacob"
-date: 2026-03-15
-author: "Maman"
-summary: "Un article du Puits de Jacob."
----
-Contenu puits de jacob.
-EOMD
 fi
 
 BUILD_OUTPUT=$(cd "$ROOT" && hugo --quiet 2>&1)
@@ -245,7 +235,7 @@ fi
 
 # Cleanup temp content
 if [ "$TEMP_CONTENT" = true ]; then
-    rm -rf "$ROOT/content/posts" "$ROOT/content/puits-de-jacob" "$ROOT/content/_index.md"
+    rm -rf "$ROOT/content/posts" "$ROOT/content/_index.md"
     rm -rf "$ROOT/public"
 fi
 

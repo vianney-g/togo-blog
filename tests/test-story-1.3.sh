@@ -100,7 +100,7 @@ else
   fail "language not set to fr"
 fi
 
-for menu in "Auteurs" "Archives" "Puits de Jacob" "À propos"; do
+for menu in "Auteurs" "Archives" "À propos"; do
   if grep -q "$menu" "$REPO_DIR/config.yaml" 2>/dev/null; then
     pass "menu '$menu' configured"
   else
@@ -170,7 +170,7 @@ fi
 if [ "$CLEANUP_CONTENT" = true ]; then
   rm -rf "$REPO_DIR/public/" "$REPO_DIR/resources/"
   # Remove synced content (belongs to content repo)
-  rm -rf "$REPO_DIR/content/posts" "$REPO_DIR/content/puits-de-jacob" "$REPO_DIR/content/auteurs"
+  rm -rf "$REPO_DIR/content/posts" "$REPO_DIR/content/auteurs"
   rm -f "$REPO_DIR/content/_index.md" "$REPO_DIR/content/a-propos.md"
   rm -rf "$REPO_DIR/static/img"
 fi

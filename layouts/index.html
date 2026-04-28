@@ -1,16 +1,14 @@
 {{ define "main" }}
 {{/*
   index.html — Page d'accueil : liste chronologique d'articles
-  Affiche tous les articles (posts + puits-de-jacob) groupés par mois,
+  Affiche tous les articles (posts) groupés par mois,
   les plus récents en premier. Pagination à 20 articles/page.
 
   Référence : Story 6.1, AC1-AC8
 */}}
 <div class="home">
   {{ $posts := where .Site.RegularPages "Section" "posts" }}
-  {{ $puits := where .Site.RegularPages "Section" "puits-de-jacob" }}
-  {{ $allPosts := union $posts $puits }}
-  {{ $paginator := .Paginate $allPosts 20 }}
+  {{ $paginator := .Paginate $posts 20 }}
 
   {{ range $paginator.Pages.GroupByDate "January 2006" }}
   <section class="month-group">

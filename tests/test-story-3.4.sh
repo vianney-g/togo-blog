@@ -58,7 +58,7 @@ fi
 # --- DoD: Section index pages ---
 echo "--- DoD: Section index pages ---"
 SECTIONS_OK=true
-for section in posts puits-de-jacob; do
+for section in posts; do
     FILE="$ROOT/content/$section/_index.md"
     if [ ! -f "$FILE" ]; then
         fail "DoD — $FILE missing"
@@ -74,9 +74,8 @@ fi
 
 # --- DoD: Permalinks configured ---
 echo "--- DoD: Permalinks ---"
-if grep -A3 '^permalinks:' "$ROOT/config.yaml" | grep -q 'posts:' &&
-   grep -A3 '^permalinks:' "$ROOT/config.yaml" | grep -q 'puits-de-jacob:'; then
-    ok "DoD — permalinks configured for posts and puits-de-jacob"
+if grep -A3 '^permalinks:' "$ROOT/config.yaml" | grep -q 'posts:'; then
+    ok "DoD — permalinks configured for posts"
 else
     fail "DoD — permalinks missing"
 fi

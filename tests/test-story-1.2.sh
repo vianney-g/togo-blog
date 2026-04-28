@@ -43,7 +43,6 @@ check "No .yaml at root (except in .github)" bash -c '! ls "$1"/*.yaml "$1"/*.ym
 echo ""
 echo "--- AC3: content/ structure ---"
 check "content/posts/ exists" test -d "$REPO/content/posts"
-check "content/puits-de-jacob/ exists" test -d "$REPO/content/puits-de-jacob"
 check "content/auteurs/ exists" test -d "$REPO/content/auteurs"
 check "content/a-propos.md exists" test -f "$REPO/content/a-propos.md"
 check "content/_index.md exists" test -f "$REPO/content/_index.md"

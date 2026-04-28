@@ -2,7 +2,7 @@
 {{/*
   archives.html — Index chronologique complet de tous les articles
   =============================================================================
-  Affiche TOUS les articles (posts + puits-de-jacob) groupés par mois/année,
+  Affiche TOUS les articles (posts) groupés par mois/année,
   ordre chronologique inversé. Pas de pagination : sommaire complet.
 
   Référence : Story 6.4, AC1-AC4
@@ -11,8 +11,7 @@
   <h1 class="archives__title">{{ .Title }}</h1>
 
   {{ $posts := where .Site.RegularPages "Section" "posts" }}
-  {{ $puits := where .Site.RegularPages "Section" "puits-de-jacob" }}
-  {{ $allPages := union $posts $puits }}
+  {{ $allPages := $posts }}
 
   {{ range $allPages.GroupByDate "January 2006" }}
   <section class="archives__month">

@@ -56,11 +56,6 @@ if grep -q 'Archives' "$CONFIG" && grep -q '/archives/' "$CONFIG"; then
 else
     fail "AC2 — Archives menu item missing"
 fi
-if grep -q 'Puits de Jacob' "$CONFIG" && grep -q '/puits-de-jacob/' "$CONFIG"; then
-    ok "AC2 — Puits de Jacob menu item"
-else
-    fail "AC2 — Puits de Jacob menu item missing"
-fi
 if grep -q 'À propos' "$CONFIG" && grep -q '/a-propos/' "$CONFIG"; then
     ok "AC2 — À propos menu item"
 else
@@ -69,10 +64,10 @@ fi
 # Verify menu weights for correct ordering
 # Verify all 4 menu items exist under menu.main
 MENU_COUNT=$(grep -c 'name:' "$CONFIG" | head -1)
-if [ "$MENU_COUNT" -ge 4 ]; then
-    ok "AC2 — 4 menu items configured"
+if [ "$MENU_COUNT" -ge 3 ]; then
+    ok "AC2 — 3 menu items configured"
 else
-    fail "AC2 — expected 4 menu items, found $MENU_COUNT"
+    fail "AC2 — expected 3 menu items, found $MENU_COUNT"
 fi
 
 # --- AC3: Mobile — horizontal menu, no hamburger ---

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # =============================================================================
 # Story 3.2 — Archetypes Hugo (templates de posts)
-# Tests hugo new with default and puits-de-jacob archetypes
+# Tests hugo new with default archetype
 # =============================================================================
 set -uo pipefail
 
@@ -14,9 +14,7 @@ echo ""
 
 cleanup() {
     rm -f "$ROOT/content/posts/2026-test-archetype.md"
-    rm -f "$ROOT/content/puits-de-jacob/2026-test-pdj.md"
     rmdir "$ROOT/content/posts" 2>/dev/null || true
-    rmdir "$ROOT/content/puits-de-jacob" 2>/dev/null || true
 }
 trap cleanup EXIT
 cleanup
@@ -79,7 +77,7 @@ fi
 
 # --- AC4b: Comment mentions categories ---
 echo "--- AC4b: Comment mentions available categories ---"
-if echo "$body" | grep -q "catégorie\|quotidien.*puits-de-jacob\|puits-de-jacob"; then
+if echo "$body" | grep -q "catégorie\|quotidien"; then
     echo "✅ PASS: AC4b — Categories guidance present"
     PASS=$((PASS + 1))
 else
@@ -88,43 +86,6 @@ else
 fi
 
 cleanup
-
-# --- AC5: puits-de-jacob archetype pre-fills categories ---
-echo "--- AC5: puits-de-jacob archetype pre-fills categories ---"
-hugo new content/puits-de-jacob/2026-test-pdj.md --kind puits-de-jacob -s "$ROOT" >/dev/null 2>&1
-PDJ="$ROOT/content/puits-de-jacob/2026-test-pdj.md"
-if [ -f "$PDJ" ]; then
-    if grep -q 'puits-de-jacob' "$PDJ"; then
-        echo "✅ PASS: AC5 — categories contains puits-de-jacob"
-        PASS=$((PASS + 1))
-    else
-        echo "❌ FAIL: AC5 — categories should contain puits-de-jacob"
-        FAIL=$((FAIL + 1))
-    fi
-else
-    echo "❌ FAIL: AC5 — PDJ file not created"
-    FAIL=$((FAIL + 1))
-fi
-
-# --- AC5b: PDJ has draft: true ---
-echo "--- AC5b: PDJ has draft: true ---"
-if grep -q '^draft: true' "$PDJ" 2>/dev/null; then
-    echo "✅ PASS: AC5b — PDJ draft: true"
-    PASS=$((PASS + 1))
-else
-    echo "❌ FAIL: AC5b — PDJ should have draft: true"
-    FAIL=$((FAIL + 1))
-fi
-
-# --- AC5c: PDJ has French comments ---
-echo "--- AC5c: PDJ has French comments ---"
-if grep -q "Puits de Jacob\|méditation\|Méditation" "$PDJ" 2>/dev/null; then
-    echo "✅ PASS: AC5c — PDJ French comments present"
-    PASS=$((PASS + 1))
-else
-    echo "❌ FAIL: AC5c — PDJ missing French comments"
-    FAIL=$((FAIL + 1))
-fi
 
 # --- AC-schema: Generated YAML is valid (once placeholders filled) ---
 echo "--- AC-schema: Generated front-matter is valid YAML ---"
@@ -187,8 +148,8 @@ fi
 
 # --- Archetype files exist ---
 echo "--- Extra: Archetype files exist ---"
-if [ -f "$ROOT/archetypes/default.md" ] && [ -f "$ROOT/archetypes/puits-de-jacob.md" ]; then
-    echo "✅ PASS: Both archetype files exist"
+if [ -f "$ROOT/archetypes/default.md" ]; then
+    echo "✅ PASS: Default archetype file exists"
     PASS=$((PASS + 1))
 else
     echo "❌ FAIL: Missing archetype files"
