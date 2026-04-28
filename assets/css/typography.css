@@ -5,7 +5,7 @@
  * Inter : métadonnées, dates, navigation, UI (sans-serif fonctionnel)
  *
  * Type scale : Perfect Fourth (ratio 1.333)
- * Base : 18px (1.125rem) sur mobile, 18px sur desktop
+ * Base : 18px (1.125rem) sur mobile, 24px sur desktop (html font-size scaled ×1.333)
  *
  * Référence : PRD FR-2, Epic 5, UX Spec §Typography System
  * ============================================================================= */
@@ -92,6 +92,13 @@ body {
   text-rendering: optimizeLegibility;
   font-variant-ligatures: common-ligatures;
   font-kerning: normal;
+}
+
+/* --- Desktop: scale all rem-based typography ×1.333 (18px → 24px) --- */
+@media (min-width: 960px) {
+  html {
+    font-size: 133.3%;  /* 16px × 1.333 ≈ 21.33px → makes 1.125rem ≈ 24px */
+  }
 }
 
 /* --- Headings --- */
