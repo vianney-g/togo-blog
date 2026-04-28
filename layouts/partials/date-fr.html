@@ -1,0 +1,10 @@
+{{- /*
+  date-fr.html — Formate une date en français : "2 janvier 2006"
+  Usage : {{ partial "date-fr.html" .Date }}
+*/ -}}
+{{- $months := dict "January" "janvier" "February" "février" "March" "mars" "April" "avril" "May" "mai" "June" "juin" "July" "juillet" "August" "août" "September" "septembre" "October" "octobre" "November" "novembre" "December" "décembre" -}}
+{{- $day := .Day -}}
+{{- $monthEN := .Format "January" -}}
+{{- $monthFR := index $months $monthEN -}}
+{{- $year := .Year -}}
+{{- printf "%d %s %d" $day $monthFR $year -}}

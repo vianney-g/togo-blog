@@ -12,7 +12,7 @@
 
   {{ range $paginator.Pages.GroupByDate "January 2006" }}
   <section class="month-group">
-    <h2 class="month-heading">{{ .Key }}</h2>
+    <h2 class="month-heading">{{ partial "month-year-fr.html" .Key }}</h2>
     {{ range .Pages }}
     <article class="article-card">
       <h3 class="article-card__title">
@@ -20,7 +20,7 @@
       </h3>
       <div class="article-card__meta">
         {{ with .Params.author }}<span class="article-card__author">{{ . }}</span>{{ end }}
-        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ partial "date-fr.html" .Date }}</time>
       </div>
       <p class="article-card__excerpt">{{ .Summary | plainify | htmlUnescape | truncate 200 }}</p>
     </article>

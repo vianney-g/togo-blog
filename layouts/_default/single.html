@@ -18,7 +18,7 @@
         <span class="article__author-emoji">{{ . }}</span>
       {{ end }}
       <time class="article__date" datetime="{{ .Date.Format "2006-01-02" }}">
-        {{ .Date.Format "2006-01-02" }}
+        {{ partial "date-fr.html" .Date }}
       </time>
     </div>
   </header>

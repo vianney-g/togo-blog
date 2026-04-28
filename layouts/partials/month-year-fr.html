@@ -1,0 +1,10 @@
+{{- /*
+  month-year-fr.html — Convertit "January 2006" en "janvier 2006"
+  Usage : {{ partial "month-year-fr.html" .Key }}
+*/ -}}
+{{- $months := dict "January" "janvier" "February" "février" "March" "mars" "April" "avril" "May" "mai" "June" "juin" "July" "juillet" "August" "août" "September" "septembre" "October" "octobre" "November" "novembre" "December" "décembre" -}}
+{{- $parts := split . " " -}}
+{{- $monthEN := index $parts 0 -}}
+{{- $year := index $parts 1 -}}
+{{- $monthFR := index $months $monthEN -}}
+{{- printf "%s %s" $monthFR $year -}}

@@ -15,11 +15,11 @@
 
   {{ range $allPages.GroupByDate "January 2006" }}
   <section class="archives__month">
-    <h2 class="archives__month-heading">{{ .Key }}</h2>
+    <h2 class="archives__month-heading">{{ partial "month-year-fr.html" .Key }}</h2>
     <ul class="archives__list">
       {{ range .Pages }}
       <li class="archives__entry">
-        <time class="archives__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+        <time class="archives__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ partial "date-fr.html" .Date }}</time>
         <a class="archives__link" href="{{ .RelPermalink }}">{{ .Title }}</a>
         {{ with .Params.author }}<span class="archives__author">— {{ . }}</span>{{ end }}
       </li>
