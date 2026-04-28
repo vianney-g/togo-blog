@@ -94,11 +94,8 @@ body {
   font-kerning: normal;
 }
 
-/* --- Desktop: scale all rem-based typography ×1.333 (18px → 24px) --- */
-@media (min-width: 960px) {
-  html {
-    font-size: 133.3%;  /* 16px × 1.333 ≈ 21.33px → makes 1.125rem ≈ 24px */
-  }
+html {
+  font-size: 133.3%;
 }
 
 /* --- Headings --- */
