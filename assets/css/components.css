@@ -400,7 +400,12 @@ a.tag:hover {
 .author-card__count {
   font-family: var(--font-sans);
   font-size: 0.8125rem;
-  color: var(--color-text-faint);
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.author-card__count:hover {
+  text-decoration: underline;
 }
 
 .author-page__emoji {

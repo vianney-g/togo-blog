@@ -9,31 +9,29 @@
 */}}
 
 {{ $authorPage := .Site.GetPage (printf "/auteurs/%s" (lower .Data.Term)) }}
+{{ $authorName := .Data.Term | humanize }}
+{{ with $authorPage }}{{ $authorName = .Title }}{{ end }}
 
-<div class="author-page">
+<div class="archives">
   <header class="author-page__header">
     {{ with $authorPage }}
       <span class="author-page__emoji">{{ .Params.emoji }}</span>
-      <h1>{{ .Title }}</h1>
-      <div class="author-page__bio">{{ .Content }}</div>
-    {{ else }}
-      <h1>{{ .Data.Term | humanize }}</h1>
     {{ end }}
+    <h1 class="archives__title">Articles de {{ $authorName }}</h1>
   </header>
 
-  <section class="author-page__articles">
-    <h2>Articles</h2>
-    {{ range .Pages.ByDate.Reverse }}
-    <article class="article-card">
-      <h3 class="article-card__title">
-        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-      </h3>
-      <div class="article-card__meta">
-        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
-      </div>
-      <p class="article-card__excerpt">{{ .Summary | plainify | truncate 200 }}</p>
-    </article>
-    {{ end }}
+  {{ range .Pages.ByDate.Reverse.GroupByDate "January 2006" }}
+  <section class="archives__month">
+    <h2 class="archives__month-heading">{{ .Key }}</h2>
+    <ul class="archives__list">
+      {{ range .Pages }}
+      <li class="archives__entry">
+        <time class="archives__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02 Jan" }}</time>
+        <a class="archives__link" href="{{ .RelPermalink }}">{{ .Title }}</a>
+      </li>
+      {{ end }}
+    </ul>
   </section>
+  {{ end }}
 </div>
 {{ end }}
