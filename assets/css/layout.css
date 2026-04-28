@@ -15,19 +15,21 @@
   min-height: 100vh;
 }
 
-.site-main {
-  flex: 1;
-  width: 100%;
-  max-width: var(--content-max-width);
-  margin: 0 auto;
-  padding: var(--space-s);
-}
+/* <main> is styled by Paper's Tailwind classes (prose, mx-auto, max-w, px-8,
+   pt-14, pb-16) in baseof.html. No .site-main override needed. */
 
 /* --- Header --- */
 
 .site-header {
   padding: var(--space-m) var(--space-s);
   text-align: center;
+}
+
+.site-header__top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-s);
 }
 
 .site-title {
@@ -47,7 +49,7 @@
 }
 
 .site-nav {
-  margin-top: var(--space-xs);
+  margin-top: var(--space-m);
 }
 
 .site-nav a {
@@ -55,9 +57,17 @@
   font-size: 0.875rem;
   color: var(--color-text-muted);
   text-decoration: none;
-  margin: 0 var(--space-xs);
   letter-spacing: 0.02em;
   text-transform: uppercase;
+}
+
+/* Séparateur typographique interpunct (·) entre les liens */
+.site-nav a + a::before {
+  content: "·";
+  color: var(--color-text-faint);
+  margin: 0 var(--space-s);
+  text-decoration: none;
+  pointer-events: none;
 }
 
 .site-nav a:hover,
@@ -65,10 +75,41 @@
   color: var(--color-link);
 }
 
+/* --- Dark mode toggle --- */
+
+.btn-dark-toggle {
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  line-height: 1;
+  padding: 0;
+  transition: border-color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.btn-dark-toggle:hover {
+  border-color: var(--color-text-muted);
+}
+
+/* Light mode: show sun, hide moon */
+.btn-dark-toggle__icon--dark { display: none; }
+.btn-dark-toggle__icon--light { display: inline; }
+
+/* Dark mode: show moon, hide sun */
+:root.dark .btn-dark-toggle__icon--dark { display: inline; }
+:root.dark .btn-dark-toggle__icon--light { display: none; }
+
 /* --- Footer --- */
 
 .site-footer {
-  padding: var(--space-l) var(--space-s);
+  padding: var(--space-l) var(--space-m);
   font-family: var(--font-sans);
   font-size: 0.8125rem;
   color: var(--color-text-faint);
@@ -98,10 +139,6 @@
 /* --- Tablet (≥ 640px) --- */
 
 @media (min-width: 640px) {
-  .site-main {
-    padding: var(--space-m);
-  }
-
   .site-header {
     padding: var(--space-l) var(--space-m);
   }
@@ -110,10 +147,6 @@
 /* --- Desktop (≥ 960px) --- */
 
 @media (min-width: 960px) {
-  .site-main {
-    padding: var(--space-l) var(--space-m);
-  }
-
   .site-header {
     padding: var(--space-xl) var(--space-m);
   }

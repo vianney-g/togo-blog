@@ -1,16 +1,22 @@
 {{/* =============================================================================
-  header.html — Site header with title and navigation
+  header.html — Site header with title, navigation and dark mode toggle
   =============================================================================
   Overrides Paper theme header. Semantic HTML, no sticky, no hamburger.
-  CSS classes defined in layout.css.
+  Includes dark mode JS: system preference + manual toggle with persistence.
 
-  Référence : Story 6.8
+  Référence : Story 6.8 (header/nav), Story 5.4 (dark mode)
   ============================================================================= */}}
 
 <header class="site-header">
-  <h1 class="site-title">
-    <a href="{{ "/" | relURL }}">{{ .Site.Title }}</a>
-  </h1>
+  <div class="site-header__top">
+    <h1 class="site-title">
+      <a href="{{ "/" | relURL }}">{{ .Site.Title }}</a>
+    </h1>
+    <button class="btn-dark-toggle" aria-label="Basculer le mode sombre">
+      <span class="btn-dark-toggle__icon btn-dark-toggle__icon--light">☀️</span>
+      <span class="btn-dark-toggle__icon btn-dark-toggle__icon--dark">🌙</span>
+    </button>
+  </div>
   <nav class="site-nav">
     {{ range .Site.Menus.main }}
     <a href="{{ .URL | relURL }}"
@@ -20,3 +26,40 @@
     {{ end }}
   </nav>
 </header>
+
+<script>
+  // Dark mode — system preference + manual toggle with localStorage persistence.
+  // Sets/removes .dark class on <html> for CSS variable chain.
+  const htmlClass = document.documentElement.classList;
+
+  // Remove Paper's not-ready class after init
+  setTimeout(() => { htmlClass.remove('not-ready'); }, 10);
+
+  // Theme color meta (for mobile browser chrome)
+  const metaTheme = document.querySelector('meta[name="theme-color"]');
+
+  const setDark = (isDark) => {
+    if (metaTheme) {
+      metaTheme.setAttribute('content', isDark ? '#1A1D21' : '#F5F2EB');
+    }
+    htmlClass[isDark ? 'add' : 'remove']('dark');
+    localStorage.setItem('dark', isDark);
+  };
+
+  // Init: localStorage > system preference
+  const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+  const darkVal = localStorage.getItem('dark');
+  setDark(darkVal !== null ? darkVal === 'true' : darkScheme.matches);
+
+  // Listen for system changes (only if no manual override)
+  darkScheme.addEventListener('change', (event) => {
+    if (localStorage.getItem('dark') === null) {
+      setDark(event.matches);
+    }
+  });
+
+  // Manual toggle
+  document.querySelector('.btn-dark-toggle').addEventListener('click', () => {
+    setDark(!htmlClass.contains('dark'));
+  });
+</script>

@@ -114,15 +114,17 @@ header a:not(#\#):not(#\#):not(#\#):hover {
   color: var(--color-accent-cold-strong);
 }
 
-/* Nav links: muted text color */
-.nav-wrapper a:not(#\#):not(#\#):not(#\#) {
+/* Nav links: muted text color (Paper .nav-wrapper + our .site-nav) */
+.nav-wrapper a:not(#\#):not(#\#):not(#\#),
+.site-nav a:not(#\#):not(#\#):not(#\#) {
   color: var(--color-text-muted);
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 0.02em;
 }
 
-.nav-wrapper a:not(#\#):not(#\#):not(#\#):hover {
+.nav-wrapper a:not(#\#):not(#\#):not(#\#):hover,
+.site-nav a:not(#\#):not(#\#):not(#\#):hover {
   color: var(--color-link);
 }
 
