@@ -22,7 +22,7 @@
         {{ with .Params.author }}<span class="article-card__author">{{ . }}</span>{{ end }}
         <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
       </div>
-      <p class="article-card__excerpt">{{ .Summary | plainify | truncate 200 }}</p>
+      <p class="article-card__excerpt">{{ .Summary | plainify | htmlUnescape | truncate 200 }}</p>
     </article>
     {{ end }}
   </section>

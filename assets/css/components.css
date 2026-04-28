@@ -43,8 +43,10 @@
 }
 
 .article-card__excerpt {
+  font-family: var(--font-serif);
+  font-size: 1rem;
   color: var(--color-text);
-  line-height: 1.6;
+  line-height: 1.75;
 }
 
 /* Safety net: reset any heading that leaks into excerpts */
