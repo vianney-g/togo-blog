@@ -511,3 +511,61 @@ a.tag:hover {
     gap: var(--space-3xs) var(--space-s);
   }
 }
+
+/* --- Section Puits de Jacob (Story 6.6) --- */
+
+.section-pdj {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-m);
+}
+
+.section-pdj__intro {
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin-bottom: var(--space-xl);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--space-m);
+}
+
+@media (max-width: 639px) {
+  .section-pdj {
+    padding: var(--space-m) var(--space-s);
+  }
+}
+
+/* --- Page 404 (Story 6.7) --- */
+
+.page-404 {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: var(--space-3xl) var(--space-m);
+  text-align: center;
+}
+
+.page-404__emoji {
+  font-size: 3rem;
+  margin-bottom: var(--space-m);
+}
+
+.page-404 h1 {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  color: var(--color-text);
+  margin-bottom: var(--space-s);
+}
+
+.page-404 p {
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-l);
+}
+
+.page-404__link {
+  color: var(--color-link);
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.page-404__link:hover {
+  text-decoration: underline;
+}
