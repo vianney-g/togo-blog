@@ -1,0 +1,26 @@
+{{/*
+  pagination.html — Navigation pagination sobre
+  « ← Plus récents » / « Plus anciens → »
+
+  Référence : Story 6.1, AC4
+*/}}
+{{ $paginator := .Paginator }}
+{{ if gt $paginator.TotalPages 1 }}
+<nav class="pagination" aria-label="Pagination">
+  <div class="pagination__inner">
+    {{ if $paginator.HasPrev }}
+    <a class="pagination__link pagination__link--prev" href="{{ $paginator.Prev.URL }}">
+      ← Plus récents
+    </a>
+    {{ end }}
+    <span class="pagination__info">
+      Page {{ $paginator.PageNumber }} / {{ $paginator.TotalPages }}
+    </span>
+    {{ if $paginator.HasNext }}
+    <a class="pagination__link pagination__link--next" href="{{ $paginator.Next.URL }}">
+      Plus anciens →
+    </a>
+    {{ end }}
+  </div>
+</nav>
+{{ end }}

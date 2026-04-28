@@ -47,6 +47,19 @@
   line-height: 1.6;
 }
 
+/* Safety net: reset any heading that leaks into excerpts */
+.article-card__excerpt h1,
+.article-card__excerpt h2,
+.article-card__excerpt h3,
+.article-card__excerpt h4,
+.article-card__excerpt h5,
+.article-card__excerpt h6 {
+  font-size: inherit;
+  font-weight: inherit;
+  margin: 0;
+  line-height: inherit;
+}
+
 /* --- Tag list --- */
 
 .tag-list {
@@ -287,4 +300,57 @@ a.tag:hover {
     text-align: left;
     margin-left: 0;
   }
+}
+
+/* --- Homepage (Story 6.1) --- */
+
+.home {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: var(--space-l) var(--space-m);
+}
+
+.month-heading {
+  font-family: var(--font-sans);
+  color: var(--color-accent-cold-strong);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--space-2xs);
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-m);
+}
+
+.month-group:first-child .month-heading {
+  margin-top: 0;
+}
+
+/* --- Pagination (Story 6.1) --- */
+
+.pagination {
+  margin-top: var(--space-xl);
+  padding-top: var(--space-m);
+  border-top: 1px solid var(--color-border);
+}
+
+.pagination__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+}
+
+.pagination__link {
+  color: var(--color-link);
+  text-decoration: none;
+}
+
+.pagination__link:hover {
+  color: var(--color-link-hover);
+}
+
+.pagination__info {
+  color: var(--color-text-muted);
 }
