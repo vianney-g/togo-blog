@@ -1,0 +1,23 @@
+{{- define "main" -}}
+{{/*
+  about.html — Template page "À propos" sobre
+  =============================================================================
+  Affiche uniquement : titre, contenu, fleuron (❦).
+  Pas d'auteur, pas de date, pas de navigation prev/next.
+*/}}
+
+<article class="article">
+  <header class="article__header">
+    <h1 class="article__title">{{ .Title }}</h1>
+  </header>
+
+  <div class="article__content prose">
+    {{ .Content }}
+  </div>
+
+  <footer class="article__footer">
+    <div class="article__fleuron" aria-hidden="true">❦</div>
+  </footer>
+</article>
+
+{{- end -}}
