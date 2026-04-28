@@ -186,6 +186,12 @@ blockquote {
   border-left: 3px solid var(--color-accent-cold);
   font-style: italic;
   color: var(--color-text-muted);
+  quotes: none;
+}
+
+blockquote p:first-of-type::before,
+blockquote p:last-of-type::after {
+  content: none !important;
 }
 
 blockquote p:last-child {
