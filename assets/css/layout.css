@@ -108,19 +108,25 @@
 
 /* --- Footer --- */
 
+/* Layout props (margin, padding, max-width, width) are handled by Tailwind
+   utility classes on the <footer> element in footer.html — matching <main>'s
+   approach — to beat Paper's high-specificity reset (*:not(#\#):not(#\#)).
+   Only non-layout styling remains here. */
 .site-footer {
-  padding: var(--space-l) var(--space-m);
   font-family: var(--font-sans);
   font-size: 0.8125rem;
   color: var(--color-text-faint);
-  border-top: 1px solid var(--color-border);
-  margin-top: var(--space-2xl);
-  max-width: var(--content-max-width);
-  margin-left: auto;
-  margin-right: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+/* border-top & padding need specificity > (2,0,0) to beat Tailwind reset.
+   No margin-top needed — <main>'s pb-16 provides spacing above footer. */
+.site-footer:not(#\#):not(#\#):not(#\#) {
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-m);
+  padding-bottom: var(--space-m);
 }
 
 .site-footer__copyright {
