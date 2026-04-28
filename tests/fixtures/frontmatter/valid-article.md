@@ -1,6 +1,6 @@
 ---
 title: "Arrivée à Sokodé"
-date: "2026-08-15T10:00:00+01:00"
+date: "2026-08-15"
 author: "monsieur"
 draft: false
 description: "Premier jour dans notre nouvelle maison."

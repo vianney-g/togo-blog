@@ -19,7 +19,7 @@
 ```yaml
 ---
 title: "Pourquoi le Togo"
-date: 2026-06-15T10:00:00+02:00
+date: 2026-06-15
 author: "Monsieur"
 draft: false
 tags: ["préparatifs", "mission"]

@@ -19,7 +19,7 @@
     <ul class="archives__list">
       {{ range .Pages }}
       <li class="archives__entry">
-        <time class="archives__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02 Jan" }}</time>
+        <time class="archives__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
         <a class="archives__link" href="{{ .RelPermalink }}">{{ .Title }}</a>
         {{ with .Params.author }}<span class="archives__author">— {{ . }}</span>{{ end }}
       </li>

@@ -1,4 +1,4 @@
 title: "Ce titre est volontairement très long pour dépasser la limite de cent-vingt caractères imposée par le schéma JSON afin de tester que la validation le rejette correctement oui"
-date: "2026-08-15T10:00:00+01:00"
+date: "2026-08-15"
 author: "monsieur"
 draft: false

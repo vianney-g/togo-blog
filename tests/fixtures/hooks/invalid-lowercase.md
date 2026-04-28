@@ -1,6 +1,6 @@
 ---
 title: "Promenade"
-date: "2026-08-20T16:00:00+01:00"
+date: "2026-08-20"
 author: "madame"
 draft: false
 ---

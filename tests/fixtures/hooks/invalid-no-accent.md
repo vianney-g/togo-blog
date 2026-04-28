@@ -1,6 +1,6 @@
 ---
 title: "Le marché"
-date: "2026-08-23T09:00:00+01:00"
+date: "2026-08-23"
 author: "madame"
 draft: false
 ---

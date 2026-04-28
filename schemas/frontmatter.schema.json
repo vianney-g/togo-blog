@@ -13,8 +13,8 @@
     },
     "date": {
       "type": "string",
-      "format": "date-time",
-      "description": "Date de publication au format ISO 8601 (ex: 2026-08-15T10:00:00+01:00)."
+      "format": "date",
+      "description": "Date de publication au format YYYY-MM-DD (ex: 2026-08-15)."
     },
     "author": {
       "type": "string",
