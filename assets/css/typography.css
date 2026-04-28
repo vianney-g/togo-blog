@@ -88,6 +88,10 @@ body {
   color: var(--color-text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Enable OpenType ligatures (fi, ffi, fl…) and kerning */
+  text-rendering: optimizeLegibility;
+  font-variant-ligatures: common-ligatures;
+  font-kerning: normal;
 }
 
 /* --- Headings --- */
