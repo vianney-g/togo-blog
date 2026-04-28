@@ -1,0 +1,32 @@
+{{ define "main" }}
+{{/*
+  list.html — Liste de tous les auteurs
+  =============================================================================
+  Affiche chaque auteur avec emoji, nom, description courte et nombre d'articles.
+
+  Référence : Story 6.3, AC5
+*/}}
+
+<div class="authors-list">
+  <h1>Les auteurs</h1>
+
+  {{ range .Data.Terms }}
+  {{ $termName := .Page.Title }}
+  {{ $authorPage := $.Site.GetPage (printf "/auteurs/%s" (lower $termName)) }}
+  <div class="author-card">
+    {{ with $authorPage }}
+      <span class="author-card__emoji">{{ .Params.emoji }}</span>
+      <h2 class="author-card__name">
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      </h2>
+      <p class="author-card__desc">{{ .Params.description }}</p>
+    {{ else }}
+      <h2 class="author-card__name">
+        <a href="{{ .Page.RelPermalink }}">{{ $termName }}</a>
+      </h2>
+    {{ end }}
+    <span class="author-card__count">{{ len .Pages }} {{ if eq (len .Pages) 1 }}article{{ else }}articles{{ end }}</span>
+  </div>
+  {{ end }}
+</div>
+{{ end }}

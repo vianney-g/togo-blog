@@ -47,6 +47,15 @@
       },
       "uniqueItems": true,
       "description": "Catégories fermées (enum). Empêche la prolifération."
+    },
+    "authors": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true,
+      "description": "Taxonomie auteur Hugo. Doit correspondre au slug d'une page content/auteurs/. Ex: ['monsieur']."
     }
   },
   "additionalProperties": false

@@ -354,3 +354,76 @@ a.tag:hover {
 .pagination__info {
   color: var(--color-text-muted);
 }
+
+/* --- Author pages (Story 6.3) --- */
+
+.authors-list,
+.author-page {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-m);
+}
+
+.author-card {
+  margin-bottom: var(--space-l);
+  padding-bottom: var(--space-l);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.author-card:last-child {
+  border-bottom: none;
+}
+
+.author-card__emoji {
+  font-size: 2rem;
+}
+
+.author-card__name {
+  font-family: var(--font-serif);
+  margin: var(--space-2xs) 0;
+}
+
+.author-card__name a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.author-card__name a:hover {
+  color: var(--color-link);
+}
+
+.author-card__desc {
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-2xs);
+}
+
+.author-card__count {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: var(--color-text-faint);
+}
+
+.author-page__emoji {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: var(--space-s);
+}
+
+.author-page__bio {
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin-bottom: var(--space-xl);
+}
+
+.author-page__articles h2 {
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--space-2xs);
+  margin-bottom: var(--space-m);
+}
+
+@media (max-width: 639px) {
+  .authors-list,
+  .author-page {
+    padding: var(--space-m) var(--space-s);
+  }
+}

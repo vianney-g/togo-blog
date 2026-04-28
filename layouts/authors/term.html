@@ -1,0 +1,39 @@
+{{ define "main" }}
+{{/*
+  term.html — Page auteur individuelle (taxonomy term)
+  =============================================================================
+  Affiche le profil de l'auteur (emoji, pseudonyme, bio) puis la liste
+  de ses articles en ordre chronologique inversé.
+
+  Référence : Story 6.3, AC1-AC4
+*/}}
+
+{{ $authorPage := .Site.GetPage (printf "/auteurs/%s" (lower .Data.Term)) }}
+
+<div class="author-page">
+  <header class="author-page__header">
+    {{ with $authorPage }}
+      <span class="author-page__emoji">{{ .Params.emoji }}</span>
+      <h1>{{ .Title }}</h1>
+      <div class="author-page__bio">{{ .Content }}</div>
+    {{ else }}
+      <h1>{{ .Data.Term | humanize }}</h1>
+    {{ end }}
+  </header>
+
+  <section class="author-page__articles">
+    <h2>Articles</h2>
+    {{ range .Pages.ByDate.Reverse }}
+    <article class="article-card">
+      <h3 class="article-card__title">
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      </h3>
+      <div class="article-card__meta">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
+      </div>
+      <p class="article-card__excerpt">{{ .Summary | plainify | truncate 200 }}</p>
+    </article>
+    {{ end }}
+  </section>
+</div>
+{{ end }}
