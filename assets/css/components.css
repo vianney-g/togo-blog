@@ -57,19 +57,24 @@
   gap: var(--space-2xs);
 }
 
-.tag-list__item a {
-  font-family: var(--font-sans);
-  font-size: 0.75rem;
-  color: var(--color-text-muted);
-  text-decoration: none;
-  padding: var(--space-3xs) var(--space-2xs);
-  border: 1px solid var(--color-border);
-  border-radius: 3px;
+.tag-list__item a,
+.tag-list__item a:visited,
+.tag-list__item a:hover,
+.tag-list__item a:active {
+  font-family: var(--font-sans) !important;
+  font-size: 0.75rem !important;
+  color: var(--color-text-muted) !important;
+  text-decoration: none !important;
+  text-decoration-line: none !important;
+  padding: 0.3em 0.7em !important;
+  border: none !important;
+  border-radius: 3px !important;
+  background-color: var(--color-bg-secondary) !important;
 }
 
 .tag-list__item a:hover {
-  color: var(--color-link);
-  border-color: var(--color-link);
+  color: var(--color-link) !important;
+  background-color: var(--color-bg) !important;
 }
 
 /* --- Figure --- */
@@ -130,4 +135,156 @@
 
 .fleuron {
   font-size: 1.5rem;
+}
+
+/* --- Article page (single.html) — Story 6.2 --- */
+
+.article {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-m);
+}
+
+.article__title {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  line-height: 1.2;
+  color: var(--color-text);
+  margin-bottom: var(--space-s);
+}
+
+.article__meta {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  margin-bottom: var(--space-xl);
+}
+
+.article__author {
+  font-variant: small-caps;
+  letter-spacing: 0.05em;
+}
+
+.article__date {
+  color: var(--color-link);
+}
+
+.article__content {
+  line-height: 1.75;
+  font-size: 1.125rem;
+}
+
+.article__tags,
+.article__categories {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: var(--space-2xs) !important;
+  margin-bottom: var(--space-m) !important;
+}
+
+.article__signature {
+  text-align: center;
+  font-variant: small-caps;
+  font-style: italic;
+  color: var(--color-text-muted);
+  margin-top: var(--space-xl);
+}
+
+.article__fleuron {
+  text-align: center;
+  font-size: 1.5rem;
+  color: var(--color-accent-warm);
+  margin: var(--space-m) 0;
+}
+
+/* --- Article navigation prev/next --- */
+
+.article-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-m);
+  margin-top: var(--space-xl);
+  padding-top: var(--space-m);
+  border-top: 1px solid var(--color-border);
+}
+
+.article-nav__prev,
+.article-nav__next,
+.article-nav__prev:visited,
+.article-nav__next:visited,
+.article-nav__prev:hover,
+.article-nav__next:hover,
+.article-nav__prev:active,
+.article-nav__next:active {
+  text-decoration: none !important;
+  text-decoration-line: none !important;
+  color: var(--color-link) !important;
+}
+
+.article-nav__prev:hover,
+.article-nav__next:hover {
+  color: var(--color-link-hover) !important;
+}
+
+.article-nav__next {
+  text-align: right;
+  margin-left: auto;
+}
+
+.article-nav__label {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  display: block;
+}
+
+.article-nav__title {
+  font-size: 0.875rem;
+}
+
+/* --- Tag (inline, style bouton) ---
+ * Paper/Tailwind + base.css forcent underline sur <a> à spécificité élevée.
+ * On utilise !important pour garantir le style bouton sans soulignage. */
+
+a.tag,
+a.tag:visited,
+a.tag:hover,
+a.tag:active {
+  display: inline-block !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.75rem !important;
+  color: var(--color-text-muted) !important;
+  background-color: var(--color-bg-secondary) !important;
+  border: none !important;
+  padding: 0.3em 0.7em !important;
+  border-radius: 3px !important;
+  text-decoration: none !important;
+  text-decoration-line: none !important;
+  margin-right: var(--space-3xs);
+  margin-bottom: var(--space-3xs);
+}
+
+a.tag:hover {
+  color: var(--color-link) !important;
+  background-color: var(--color-bg) !important;
+}
+
+/* --- Responsive: mobile (360px) --- */
+
+@media (max-width: 639px) {
+  .article {
+    padding: var(--space-m) var(--space-s);
+  }
+
+  .article__title {
+    font-size: 1.5rem;
+  }
+
+  .article-nav {
+    flex-direction: column;
+    gap: var(--space-s);
+  }
+
+  .article-nav__next {
+    text-align: left;
+    margin-left: 0;
+  }
 }

@@ -1,0 +1,22 @@
+{{/*
+  article-nav.html — Navigation prev/next entre articles
+  =============================================================================
+  Affiche les liens vers l'article précédent et suivant dans la même section.
+
+  Référence : Story 6.2
+*/}}
+
+<nav class="article-nav" aria-label="Navigation entre articles">
+  {{ with .PrevInSection }}
+  <a href="{{ .RelPermalink }}" class="article-nav__prev">
+    <span class="article-nav__label">← Article précédent</span>
+    <span class="article-nav__title">{{ .Title }}</span>
+  </a>
+  {{ end }}
+  {{ with .NextInSection }}
+  <a href="{{ .RelPermalink }}" class="article-nav__next">
+    <span class="article-nav__label">Article suivant →</span>
+    <span class="article-nav__title">{{ .Title }}</span>
+  </a>
+  {{ end }}
+</nav>
