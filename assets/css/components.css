@@ -186,8 +186,7 @@
   font-size: 1.125rem;
 }
 
-.article__tags,
-.article__categories {
+.article__tags {
   display: flex !important;
   flex-wrap: wrap !important;
   gap: var(--space-2xs) !important;

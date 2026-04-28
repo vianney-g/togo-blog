@@ -9,7 +9,6 @@ theme: "hugo-paper"
 # Taxonomies (FR-3)
 taxonomies:
   author: authors
-  category: categories
   tag: tags
 
 # Menus

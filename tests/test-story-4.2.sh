@@ -66,21 +66,9 @@ else
 fi
 rm -rf "$TMPD"
 
-# --- AC3: Invalid category (hors enum) → exit 1 ---
-echo "--- AC3: Bad category → validation fails ---"
-TMPD=$(setup_content "$FIXTURES/invalid-bad-category.md")
-if bash "$SCRIPT" "$TMPD/content" "$SCHEMA" > /dev/null 2>&1; then
-    echo -e "  ${RED}❌ FAIL${NC}: Bad category accepted (should fail)"
-    FAIL=$((FAIL + 1))
-else
-    echo -e "  ${GREEN}✅ PASS${NC}: Bad category rejected"
-    PASS=$((PASS + 1))
-fi
-rm -rf "$TMPD"
-
 # --- AC4: Multiple files → reports ALL errors (no early stop) ---
 echo "--- AC4: Multiple files, reports all errors ---"
-TMPD=$(setup_content "$FIXTURES/valid-article.md" "$FIXTURES/invalid-missing-author.md" "$FIXTURES/invalid-bad-category.md")
+TMPD=$(setup_content "$FIXTURES/valid-article.md" "$FIXTURES/invalid-missing-author.md")
 OUTPUT=$(bash "$SCRIPT" "$TMPD/content" "$SCHEMA" 2>&1)
 # Should have exit 1 (errors present)
 EXIT_CODE=$?
@@ -91,13 +79,13 @@ else
     echo -e "  ${RED}❌ FAIL${NC}: Exit 0 with invalid files"
     FAIL=$((FAIL + 1))
 fi
-# Should report 2 errors (missing-author + bad-category)
+# Should report 1 error (missing-author)
 ERROR_COUNT=$(echo "$OUTPUT" | grep -c "❌ ERREUR" || true)
-if [ "$ERROR_COUNT" -ge 2 ]; then
+if [ "$ERROR_COUNT" -ge 1 ]; then
     echo -e "  ${GREEN}✅ PASS${NC}: All errors reported ($ERROR_COUNT errors)"
     PASS=$((PASS + 1))
 else
-    echo -e "  ${RED}❌ FAIL${NC}: Not all errors reported (got $ERROR_COUNT, expected >=2)"
+    echo -e "  ${RED}❌ FAIL${NC}: Not all errors reported (got $ERROR_COUNT, expected >=1)"
     FAIL=$((FAIL + 1))
 fi
 rm -rf "$TMPD"

@@ -35,7 +35,7 @@ fi
 # --- AC2: Taxonomies author, categories, tags ---
 echo "--- AC2: Taxonomies ---"
 
-for tax in "author: authors" "category: categories" "tag: tags"; do
+for tax in "author: authors" "tag: tags"; do
   if grep -q "$tax" "$REPO_DIR/config.yaml" 2>/dev/null; then
     pass "taxonomy '$tax' configured"
   else

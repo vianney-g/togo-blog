@@ -7,8 +7,6 @@ description: "Premier jour dans notre nouvelle maison."
 tags:
   - sokode
   - arrivee
-categories:
-  - quotidien
 ---
 
 Notre avion a atterri à Lomé tôt le matin. Après un long trajet en voiture,

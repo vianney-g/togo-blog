@@ -126,18 +126,13 @@ else
     fail "AC6 — article not centered"
 fi
 
-# --- AC7: Tags/categories clickable ---
+# --- AC7: Tags clickable ---
 echo ""
-echo "--- AC7: Tags/categories clickable ---"
+echo "--- AC7: Tags clickable ---"
 if grep -q 'tags/' "$SINGLE" && grep -q 'urlize' "$SINGLE"; then
     ok "AC7 — tags link to taxonomy pages"
 else
     fail "AC7 — tags not linked"
-fi
-if grep -q 'categories/' "$SINGLE"; then
-    ok "AC7 — categories link to taxonomy pages"
-else
-    fail "AC7 — categories not linked"
 fi
 
 # --- AC8: No parasitic UI elements ---

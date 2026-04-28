@@ -39,15 +39,6 @@
       "uniqueItems": true,
       "description": "Tags libres (émergence naturelle). Ex: ['sokode', 'marche', 'cuisine']."
     },
-    "categories": {
-      "type": "array",
-      "items": {
-        "type": "string",
-        "enum": ["quotidien", "coulisses-vsi", "ce2", "memoire"]
-      },
-      "uniqueItems": true,
-      "description": "Catégories fermées (enum). Empêche la prolifération."
-    },
     "authors": {
       "type": "array",
       "items": {

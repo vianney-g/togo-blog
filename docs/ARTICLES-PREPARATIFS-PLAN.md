@@ -22,7 +22,6 @@ title: "Pourquoi le Togo"
 date: 2026-06-15T10:00:00+02:00
 author: "Monsieur"
 draft: false
-categories: ["quotidien"]
 tags: ["préparatifs", "mission"]
 description: "Comment une famille de cinq décide de partir en mission VSI à Sokodé."
 ---

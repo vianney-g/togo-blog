@@ -117,16 +117,6 @@ else
     FAIL=$((FAIL + 1))
 fi
 
-# --- DoD: famille has categories: quotidien ---
-echo "--- DoD: famille template has quotidien category ---"
-if grep -q 'quotidien' "$FAMILLE" 2>/dev/null; then
-    echo "✅ PASS: DoD — quotidien category in famille"
-    PASS=$((PASS + 1))
-else
-    echo "❌ FAIL: DoD — quotidien category missing"
-    FAIL=$((FAIL + 1))
-fi
-
 echo ""
 echo "=== Results: $PASS passed, $FAIL failed ==="
 [ $FAIL -eq 0 ] && exit 0 || exit 1

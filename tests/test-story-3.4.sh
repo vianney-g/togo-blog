@@ -17,9 +17,8 @@ echo ""
 # --- AC1: Taxonomies configured in config.yaml ---
 echo "--- AC1: Taxonomies in config.yaml ---"
 if grep -A4 '^taxonomies:' "$ROOT/config.yaml" | grep -q 'author: authors' &&
-   grep -A4 '^taxonomies:' "$ROOT/config.yaml" | grep -q 'category: categories' &&
    grep -A4 '^taxonomies:' "$ROOT/config.yaml" | grep -q 'tag: tags'; then
-    ok "AC1 — taxonomies author/category/tag configured"
+    ok "AC1 — taxonomies author/tag configured"
 else
     fail "AC1 — taxonomies missing or incomplete"
 fi
@@ -104,14 +103,6 @@ if [ -f "$ROOT/public/authors/monsieur/index.html" ]; then
     ok "AC6 — /authors/monsieur/ page exists"
 else
     fail "AC6 — /authors/monsieur/index.html not found"
-fi
-
-# --- AC3: /categories/ directory generated ---
-echo "--- AC3: categories directory generated ---"
-if [ -d "$ROOT/public/categories" ]; then
-    ok "AC3 — /categories/ directory exists"
-else
-    fail "AC3 — /categories/ directory not found"
 fi
 
 # --- AC4: /tags/ directory generated ---

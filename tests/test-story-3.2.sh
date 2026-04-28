@@ -26,7 +26,7 @@ FILE="$ROOT/content/posts/2026-test-archetype.md"
 if [ -f "$FILE" ]; then
     fm=$(sed -n '/^---$/,/^---$/p' "$FILE")
     ok=true
-    for field in title date author draft tags categories; do
+    for field in title date author draft tags; do
         if ! echo "$fm" | grep -q "^${field}:"; then
             echo "  Missing field: $field"
             ok=false
@@ -72,16 +72,6 @@ if echo "$body" | grep -q "pseudonyme\|Remplace author\|nom de plume"; then
     PASS=$((PASS + 1))
 else
     echo "❌ FAIL: AC4 — Missing French guide comments"
-    FAIL=$((FAIL + 1))
-fi
-
-# --- AC4b: Comment mentions categories ---
-echo "--- AC4b: Comment mentions available categories ---"
-if echo "$body" | grep -q "catégorie\|quotidien"; then
-    echo "✅ PASS: AC4b — Categories guidance present"
-    PASS=$((PASS + 1))
-else
-    echo "❌ FAIL: AC4b — Missing categories guidance"
     FAIL=$((FAIL + 1))
 fi
 

@@ -36,14 +36,6 @@
     </div>
     {{ end }}
 
-    {{ with .Params.categories }}
-    <div class="article__categories">
-      {{ range . }}
-        <a href="{{ "categories/" | relURL }}{{ . | urlize }}/" class="tag">{{ . }}</a>
-      {{ end }}
-    </div>
-    {{ end }}
-
     <div class="article__signature">
       <span class="signature-name">{{ .Params.author | default site.Params.author }}</span>
     </div>
