@@ -60,7 +60,8 @@
   text-transform: uppercase;
 }
 
-.site-nav a:hover {
+.site-nav a:hover,
+.site-nav a[aria-current="page"] {
   color: var(--color-link);
 }
 
@@ -68,12 +69,30 @@
 
 .site-footer {
   padding: var(--space-l) var(--space-s);
-  text-align: center;
   font-family: var(--font-sans);
   font-size: 0.8125rem;
   color: var(--color-text-faint);
   border-top: 1px solid var(--color-border);
   margin-top: var(--space-2xl);
+  max-width: var(--content-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-footer__copyright {
+  color: var(--color-text-faint);
+}
+
+.site-footer__rss {
+  color: var(--color-text-faint);
+  text-decoration: none;
+}
+
+.site-footer__rss:hover {
+  color: var(--color-link);
 }
 
 /* --- Tablet (≥ 640px) --- */

@@ -1,0 +1,16 @@
+{{/* =============================================================================
+  footer.html — Site footer with copyright and RSS
+  =============================================================================
+  Overrides Paper theme footer. No "Powered by Hugo".
+
+  Référence : Story 6.8
+  ============================================================================= */}}
+
+<footer class="site-footer">
+  <span class="site-footer__copyright">
+    © {{ now.Year }} · Fait main, avec soin
+  </span>
+  <a href="{{ "/index.xml" | relURL }}" class="site-footer__rss" aria-label="Flux RSS">
+    RSS
+  </a>
+</footer>
