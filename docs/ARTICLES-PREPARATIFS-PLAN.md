@@ -1,7 +1,7 @@
 # Plan des articles "Préparatifs"
 
 > 4 à 6 articles à publier avant le départ (août 2026).
-> Les articles sont rédigés dans le repo `togo-blog-content/content/posts/` et `togo-blog-content/content/puits-de-jacob/`.
+> Les articles sont rédigés dans le repo `togo-blog-content/content/posts/`
 
 ## Sujets planifiés
 
@@ -23,13 +23,13 @@ date: 2026-06-15
 author: "Monsieur"
 draft: false
 tags: ["préparatifs", "mission"]
-description: "Comment une famille de cinq décide de partir en mission VSI à Sokodé."
+description: "Comment une famille de six décide de partir en mission VSI à Sokodé."
 ---
 ```
 
 ## Processus pour chaque article
 
-1. Créer le fichier dans `togo-blog-content/content/posts/` (ou `puits-de-jacob/`)
+1. Créer le fichier dans `togo-blog-content/content/posts/`
 2. Utiliser le template Typora ou l'archetype Hugo
 3. Rédiger le contenu en respectant la charte éditoriale
 4. Le hook pre-commit vérifie automatiquement (prénoms, front-matter)

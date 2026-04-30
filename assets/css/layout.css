@@ -32,9 +32,11 @@
   gap: var(--space-s);
 }
 
-.site-title {
+/* font-size needs specificity > (2,0,1) to beat Paper's
+   h1:not(#\#):not(#\#) { font-size: inherit; font-weight: inherit } */
+.site-title:not(#\#):not(#\#):not(#\#) {
   font-family: var(--font-serif);
-  font-size: var(--text-h4);
+  font-size: var(--text-h3);
   font-weight: 500;
   margin: 0;
 }
@@ -46,6 +48,11 @@
 
 .site-title a:hover {
   color: var(--color-accent-cold-strong);
+}
+
+/* Colored drop cap — lettrine in kobaicha foncé */
+.site-title__lettrine {
+  color: var(--color-kobaicha-fonce);
 }
 
 .site-nav {
@@ -73,6 +80,35 @@
 .site-nav a:hover,
 .site-nav a[aria-current="page"] {
   color: var(--color-link);
+}
+
+/* --- Kente band — site visual signature ---
+ * Three colored lines (kobaicha, asagi, usuzumi) evoke West African textile.
+ * Always visible on top of every page; mirrored below header on homepage. */
+
+.kente-band {
+  --kente-1: var(--color-kobaicha);
+  --kente-2: var(--color-asagi-iro);
+  --kente-3: var(--color-usuzumi);
+  height: 13px; /* 3 lines × 3px + 2 gaps × 2px */
+  background: linear-gradient(
+    to bottom,
+    var(--kente-1) 0px, var(--kente-1) 3px,
+    transparent 3px, transparent 5px,
+    var(--kente-2) 5px, var(--kente-2) 8px,
+    transparent 8px, transparent 10px,
+    var(--kente-3) 10px, var(--kente-3) 13px
+  );
+}
+
+/* --- Homepage header — « L'Encre et le Kente » --- */
+
+.site-header--home {
+  padding: var(--space-xl) var(--space-s);
+}
+
+.site-header--home .site-title:not(#\#):not(#\#):not(#\#) {
+  font-size: 3.5rem;
 }
 
 /* --- Dark mode toggle --- */
@@ -148,6 +184,14 @@
   .site-header {
     padding: var(--space-l) var(--space-m);
   }
+
+  .site-header--home {
+    padding: var(--space-2xl) var(--space-m);
+  }
+
+  .site-header--home .site-title:not(#\#):not(#\#):not(#\#) {
+    font-size: 4rem;
+  }
 }
 
 /* --- Desktop (≥ 960px) --- */
@@ -155,5 +199,13 @@
 @media (min-width: 960px) {
   .site-header {
     padding: var(--space-xl) var(--space-m);
+  }
+
+  .site-header--home {
+    padding: var(--space-3xl) var(--space-m);
+  }
+
+  .site-header--home .site-title:not(#\#):not(#\#):not(#\#) {
+    font-size: 5rem;
   }
 }

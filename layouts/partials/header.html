@@ -1,16 +1,22 @@
 {{/* =============================================================================
-  header.html — Site header with title, navigation and dark mode toggle
+  header.html — Site header with kente band, title, navigation and dark mode
   =============================================================================
   Overrides Paper theme header. Semantic HTML, no sticky, no hamburger.
   Includes dark mode JS: system preference + manual toggle with persistence.
 
+  « L'Encre et le Kente » — three colored lines (kobaicha, asagi, usuzumi)
+  evoke West African textile patterns. The band is the site's visual signature.
+  Homepage gets a larger title, colored drop cap, and author byline.
+
   Référence : Story 6.8 (header/nav), Story 5.4 (dark mode)
   ============================================================================= */}}
 
-<header class="site-header">
+<div class="kente-band" aria-hidden="true"></div>
+
+<header class="site-header{{ if .IsHome }} site-header--home{{ end }}">
   <div class="site-header__top">
     <h1 class="site-title">
-      <a href="{{ site.Home.RelPermalink }}">{{ .Site.Title }}</a>
+      <a href="{{ site.Home.RelPermalink }}"><span class="site-title__lettrine">{{ substr .Site.Title 0 1 }}</span>{{ substr .Site.Title 1 }}</a>
     </h1>
     <button class="btn-dark-toggle" aria-label="Basculer le mode sombre">
       <span class="btn-dark-toggle__icon btn-dark-toggle__icon--light">☀️</span>

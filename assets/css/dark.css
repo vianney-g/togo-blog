@@ -41,6 +41,18 @@ body:where(.dark,.dark *):not(#\#):not(#\#):not(#\#):not(#\#):not(#\#)::before {
   background-color: transparent;
 }
 
+/* --- Kente band: brighter threads on dark background --- */
+:root.dark .kente-band {
+  --kente-1: var(--color-kobaicha);         /* warm beige — glows on dark bg */
+  --kente-2: var(--color-asagi-fonce);      /* deeper blue — still visible */
+  --kente-3: var(--color-usuzumi-clair);    /* lighter gray */
+}
+
+/* --- Lettrine: lighter kobaicha on dark background --- */
+:root.dark .site-title__lettrine {
+  color: var(--color-kobaicha);
+}
+
 /* --- Images : légère réduction de luminosité pour confort --- */
 .dark img {
   opacity: 0.92;

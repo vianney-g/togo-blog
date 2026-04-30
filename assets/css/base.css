@@ -110,6 +110,11 @@ header a:not(#\#):not(#\#):not(#\#) {
   text-decoration: none;
 }
 
+/* Lettrine: override header link color for the drop cap */
+header a:not(#\#):not(#\#):not(#\#) .site-title__lettrine {
+  color: var(--color-kobaicha-fonce);
+}
+
 header a:not(#\#):not(#\#):not(#\#):hover {
   color: var(--color-accent-cold-strong);
 }
