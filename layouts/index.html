@@ -23,6 +23,7 @@
         <time datetime="{{ .Date.Format "2006-01-02" }}">{{ partial "date-fr.html" .Date }}</time>
       </div>
       <p class="article-card__excerpt">{{ .Summary | plainify | htmlUnescape | truncate 200 }}</p>
+      <a href="{{ .RelPermalink }}" class="article-card__read-more">Lire la suite →</a>
     </article>
     {{ end }}
   </section>

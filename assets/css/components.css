@@ -49,6 +49,20 @@
   line-height: 1.75;
 }
 
+.article-card__read-more {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: var(--color-link);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  display: inline-block;
+  margin-top: var(--space-2xs);
+}
+
+.article-card__read-more:hover {
+  color: var(--color-link-hover);
+}
+
 /* Safety net: reset any heading that leaks into excerpts */
 .article-card__excerpt h1,
 .article-card__excerpt h2,
