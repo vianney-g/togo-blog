@@ -42,6 +42,11 @@
   margin-bottom: var(--space-xs);
 }
 
+.article-card__author {
+  font-variant: small-caps;
+  letter-spacing: 0.05em;
+}
+
 .article-card__excerpt {
   font-family: var(--font-serif);
   font-size: 1rem;
