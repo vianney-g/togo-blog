@@ -88,7 +88,7 @@ jobs:
           HUGO_MINIFY_TDEWOLFF_HTML_KEEPCOMMENTS: false
         run: |
           hugo --minify --gc \
-            --baseURL "${{ steps.pages.outputs.base_url || 'https://vianney-g.github.io/togo-blog/' }}"
+            --baseURL "${{ steps.pages.outputs.base_url || 'https://toogoodtogo.blog/' }}"
 
       # --- Upload artifact pour le déploiement ---
       - name: Upload artifact

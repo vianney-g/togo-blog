@@ -1,7 +1,7 @@
 # config.yaml — Hugo configuration
 # Le Togo en famille
 
-baseURL: "https://vianney-g.github.io/togo-blog/"
+baseURL: "https://toogoodtogo.blog/"
 languageCode: "fr"
 title: "Le Togo en famille"
 theme: "hugo-paper"
