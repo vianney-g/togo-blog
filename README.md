@@ -1,4 +1,4 @@
-# Le Togo en famille
+# Too Good Togo !
 
 Blog statique Hugo documentant l'aventure de la famille à Sokodé (Togo, 2026).
 

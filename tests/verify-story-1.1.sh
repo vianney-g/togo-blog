@@ -38,7 +38,7 @@ check ".gitignore excludes .hugo_build.lock" grep -q "^\.hugo_build\.lock" "$ROO
 echo ""
 echo "--- AC5: README.md ---"
 check "README.md exists" test -f "$ROOT/README.md"
-check "README.md contains project description" grep -q "Le Togo en famille" "$ROOT/README.md"
+check "README.md contains project description" grep -q "Too Good Togo !" "$ROOT/README.md"
 check "README.md contains structure table" grep -q "archetypes" "$ROOT/README.md"
 
 # AC1: Git repo

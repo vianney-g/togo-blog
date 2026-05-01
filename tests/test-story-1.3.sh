@@ -88,7 +88,7 @@ fi
 # --- AC5: Site title, language fr, menus ---
 echo "--- AC5: Title, language, menus ---"
 
-if grep -q 'title: "Le Togo en famille"' "$REPO_DIR/config.yaml" 2>/dev/null; then
+if grep -q 'title: "Too Good Togo !"' "$REPO_DIR/config.yaml" 2>/dev/null; then
   pass "site title configured"
 else
   fail "site title missing"

@@ -1,4 +1,4 @@
-# Checklist pré-lancement — Le Togo en famille
+# Checklist pré-lancement — Too Good Togo !
 
 > Validation finale avant le départ en mission (août 2026).
 > Chaque item doit être coché avant le go.

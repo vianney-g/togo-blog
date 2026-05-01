@@ -1,4 +1,4 @@
-# Charte éditoriale — Le Togo en famille
+# Charte éditoriale — Too Good Togo !
 
 ## Nos 6 valeurs
 

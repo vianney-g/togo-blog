@@ -1,9 +1,9 @@
 # config.yaml — Hugo configuration
-# Le Togo en famille
+# Too Good Togo !
 
 baseURL: "https://toogoodtogo.blog/"
 languageCode: "fr"
-title: "Le Togo en famille"
+title: "Too Good Togo !"
 theme: "hugo-paper"
 
 # Taxonomies (FR-3)

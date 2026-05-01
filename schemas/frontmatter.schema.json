@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Article front-matter — Le Togo en famille",
+  "title": "Article front-matter — Too Good Togo !",
   "description": "Schema de validation des métadonnées YAML front-matter des articles du blog.",
   "type": "object",
   "required": ["title", "date", "author", "draft"],

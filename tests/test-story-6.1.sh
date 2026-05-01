@@ -189,7 +189,7 @@ if [ ! -d "$ROOT/content/posts" ]; then
     mkdir -p "$ROOT/content/posts"
     cat > "$ROOT/content/_index.md" << 'EOMD'
 ---
-title: "Le Togo en famille"
+title: "Too Good Togo !"
 ---
 EOMD
     for i in $(seq 1 3); do
