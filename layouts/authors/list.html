@@ -22,7 +22,7 @@
         {{- end -}}
         {{ .Title }}
       </h2>
-      <p class="author-card__desc">{{ .Params.description }}</p>
+      <div class="author-card__desc">{{ .Content }}</div>
     {{ else }}
       <h2 class="author-card__name">{{ $termName }}</h2>
     {{ end }}

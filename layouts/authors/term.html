@@ -24,6 +24,10 @@
     </h1>
   </header>
 
+  {{ with $authorPage }}
+    <div class="author-page__bio">{{ .Content }}</div>
+  {{ end }}
+
   {{ range .Pages.ByDate.Reverse.GroupByDate "January 2006" }}
   <section class="archives__month">
     <h2 class="archives__month-heading">{{ partial "month-year-fr.html" .Key }}</h2>
