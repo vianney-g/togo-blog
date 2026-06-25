@@ -50,6 +50,21 @@ $btn.Add_Click({
     $btn.Text = "Publication..."
 
     try {
+        # --- Synchronisation avec le serveur ---
+        # Récupère les éventuelles modifications distantes (ex: corrections de Vianney)
+        # avant de publier. Permet aussi de mettre à jour le repo même sans rien à publier.
+        $pullOutput = & git pull --rebase 2>&1 | Out-String
+        if ($LASTEXITCODE -ne 0) {
+            & git rebase --abort 2>&1 | Out-Null
+            [Windows.Forms.MessageBox]::Show(
+                "Impossible de synchroniser avec le serveur.`n`nTon article est sauvegardé localement. Demande à Vianney de t'aider.`n`nDétails : $pullOutput",
+                "⚠️ Synchronisation échouée", 'OK', 'Warning'
+            )
+            $btn.Enabled = $true
+            $btn.Text = "📝 Publier"
+            return
+        }
+
         # Vérifier s'il y a des modifications
         $status = & git status --porcelain 2>&1
         if (-not $status) {
