@@ -1,0 +1,40 @@
+{{- define "main" -}}
+{{/*
+  newsletter.html — Page d'inscription à la newsletter
+  =============================================================================
+  Affiche le texte explicatif + formulaire embed Buttondown.
+  Pattern : identique à about.html (titre centré, contenu, fleuron).
+*/}}
+
+<article class="article">
+  <header class="article__header">
+    <h1 class="article__title" style="text-align: center;">{{ .Title }}</h1>
+  </header>
+
+  <div class="article__content prose">
+    {{ .Content }}
+
+    <form
+      action="https://buttondown.com/api/emails/embed-subscribe/toogoodtogo"
+      method="post"
+      target="popupwindow"
+      class="newsletter-form"
+    >
+      <label for="bd-email">Votre adresse email :</label>
+      <input
+        type="email"
+        name="email"
+        id="bd-email"
+        placeholder="mamie@example.com"
+        required
+      />
+      <button type="submit">S'inscrire</button>
+    </form>
+  </div>
+
+  <footer class="article__footer">
+    <div class="article__fleuron" aria-hidden="true">❦</div>
+  </footer>
+</article>
+
+{{- end -}}

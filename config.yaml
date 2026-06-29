@@ -23,6 +23,9 @@ menu:
     - name: "Archives"
       url: "/archives/"
       weight: 20
+    - name: "Newsletter"
+      url: "/newsletter/"
+      weight: 25
     - name: "À propos"
       url: "/a-propos/"
       weight: 30
