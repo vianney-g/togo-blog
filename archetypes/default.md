@@ -5,6 +5,7 @@ author: ""
 draft: true
 description: ""
 tags: []
+# instagram_image: "img/YYYY-MM/photo.jpg"   # optionnel — pour post Instagram automatique
 ---
 
 <!-- 
@@ -14,4 +15,5 @@ tags: []
   - Remplace author par ton nom de plume (PAS ton vrai prénom)
   - Ajoute des tags libres pour décrire le sujet (ex: sokode, marche, cuisine)
   - Passe draft à false quand l'article est prêt à publier
+  - (Optionnel) Décommente instagram_image pour poster une photo sur Instagram
 -->

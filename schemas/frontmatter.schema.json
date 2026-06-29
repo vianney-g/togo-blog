@@ -47,6 +47,11 @@
       },
       "uniqueItems": true,
       "description": "Taxonomie auteur Hugo. Doit correspondre au slug d'une page content/auteurs/. Ex: ['monsieur']."
+    },
+    "instagram_image": {
+      "type": "string",
+      "description": "Chemin relatif vers l'image pour le post Instagram automatique (ex: img/2026-08/arrivee-01.jpg). Optionnel — si absent, pas de post Instagram.",
+      "pattern": "^img/.*\\.(jpg|jpeg|png|webp)$"
     }
   },
   "additionalProperties": false
