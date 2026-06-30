@@ -1,59 +1,44 @@
 /* =============================================================================
- * dark.css — Mode sombre via classe .dark (compatible Paper toggle)
+ * dark.css — Mode sombre « Garamond & Encre » (direction 1A)
  * =============================================================================
- * Paper's JS (header.html) adds/removes .dark on <html> based on:
- *   1. System preference (prefers-color-scheme)
- *   2. Manual toggle button
- *   3. localStorage persistence
- *
- * We override our semantic tokens on :root.dark so everything updates
- * automatically through the CSS custom property chain.
- *
- * Stratégie : inverser les rôles des couleurs.
- *   - Fond : sumi-doux au lieu de washi
- *   - Texte : washi-ombre au lieu de sumi
- *   - Accents : variantes claires pour le texte, foncées pour les ornements
- *
- * Référence : Epic 5 Story 5.4
+ * Paper's JS (header.html) ajoute/retire .dark sur <html>.
+ * On surcharge les tokens sémantiques sur :root.dark — toute la chaîne de
+ * custom properties se met à jour automatiquement.
  * ============================================================================= */
 
 :root.dark {
-  /* --- Override tokens sémantiques --- */
-  --color-bg:             var(--color-sumi-doux);
-  --color-bg-secondary:   var(--color-sumi-cendre);
-  --color-text:           var(--color-washi-ombre);
-  --color-text-muted:     var(--color-usuzumi-clair);
-  --color-text-faint:     var(--color-usuzumi);
-  --color-link:           var(--color-kobaicha);         /* plus clair pour lisibilité */
-  --color-link-hover:     var(--color-washi);
-  --color-accent-cold:    var(--color-asagi-fonce);      /* plus visible sur fond sombre */
-  --color-accent-cold-strong: var(--color-asagi-iro);
-  --color-accent-warm:    var(--color-kobaicha-fonce);
-  --color-border:         var(--color-sumi-bordure);
+  --color-bg:                 var(--color-sumi-doux);     /* #1B1A17 */
+  --color-bg-secondary:       var(--color-sumi-cendre);   /* #26241F */
+  --color-text:               var(--color-washi-cendre);  /* #ECE7DC */
+  --color-text-muted:         #A89F8E;
+  --color-text-faint:         #6B655B;
+  --color-link:               var(--color-terre-clair);   /* #DA8A63 — plus clair */
+  --color-link-hover:         var(--color-washi);
+  --color-accent-cold:        var(--color-ardoise-clair); /* #7FA6B3 */
+  --color-accent-cold-strong: #A7C3CC;
+  --color-accent-warm:        var(--color-ocre);
+  --color-border:             var(--color-sumi-bordure);  /* #38352D */
+  --color-primary:            var(--color-terre-clair);
 }
 
-/* --- Neutralize Paper's dark overlay pseudo-element ---
- * Paper creates a fixed ::before on body with bg-black/85 in dark mode.
- * Since we handle dark background via --color-bg, this overlay would
- * make the page too dark. We make it transparent.
- * Specificity matches Tailwind v4: body + 5× :not(#\#) + ::before */
+/* --- Neutralise l'overlay sombre de Paper (bg-black/85 sur body::before) --- */
 body:where(.dark,.dark *):not(#\#):not(#\#):not(#\#):not(#\#):not(#\#)::before {
   background-color: transparent;
 }
 
-/* --- Kente band: brighter threads on dark background --- */
+/* --- Fil kente : fils plus lumineux sur fond sombre --- */
 :root.dark .kente-band {
-  --kente-1: var(--color-kobaicha);         /* warm beige — glows on dark bg */
-  --kente-2: var(--color-asagi-fonce);      /* deeper blue — still visible */
-  --kente-3: var(--color-usuzumi-clair);    /* lighter gray */
+  --kente-1: var(--color-terre-clair);   /* terre cuite claire */
+  --kente-2: var(--color-ardoise-clair); /* ardoise claire */
+  --kente-3: var(--color-ocre);          /* ocre */
 }
 
-/* --- Lettrine: lighter kobaicha on dark background --- */
+/* --- Lettrine plus claire sur fond sombre --- */
 :root.dark .site-title__lettrine {
-  color: var(--color-kobaicha);
+  color: var(--color-terre-clair);
 }
 
-/* --- Images : légère réduction de luminosité pour confort --- */
+/* --- Images : légère réduction de luminosité pour le confort --- */
 .dark img {
   opacity: 0.92;
   transition: opacity 0.2s ease;

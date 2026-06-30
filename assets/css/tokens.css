@@ -1,48 +1,50 @@
 /* =============================================================================
- * tokens.css — Design tokens Asagi-Usuzumi
+ * tokens.css — Design tokens « Garamond & Encre » (direction 1A)
  * =============================================================================
  * Source unique de vérité pour la palette, l'espacement et les breakpoints.
  * Aucune couleur ou valeur d'espacement ne doit être définie ailleurs.
  *
- * Palette inspirée des teintes japonaises traditionnelles :
- *   - Asagi (浅葱) : bleu-vert pâle
- *   - Usuzumi (薄墨) : encre diluée, gris-bleu
- *   - Washi (和紙) : papier japonais, beige crème
- *   - Sumi (墨) : encre noire
- *   - Kobaicha (紅梅茶) : thé de prunier rouge
- *
- * Référence : PRD FR-2, Architecture §7, UX Spec §Color System
+ * Palette éditoriale chaleureuse :
+ *   - Washi (papier crème)        : fond, lumière
+ *   - Sumi (encre)                : texte
+ *   - Terre cuite                 : liens, accent chaud — évoque l'ocre togolais
+ *   - Ardoise                     : accent froid — titres de section, séparateurs
+ *   - Ocre                        : ornements (fleuron, fil kente)
  * ============================================================================= */
 
 :root {
   /* --- Palette brute --- */
-  --color-washi:          #F5F2EB;  /* fond principal — papier crème */
-  --color-washi-ombre:    #E8E4DB;  /* fond secondaire — papier vieilli */
-  --color-sumi:           #1C1C1C;  /* texte principal — encre noire */
-  --color-sumi-doux:      #1A1D21;  /* fond mode sombre */
-  --color-usuzumi:        #6E7A85;  /* texte secondaire — encre diluée */
-  --color-usuzumi-clair:  #9BA5AE;  /* texte tertiaire — très dilué */
-  --color-asagi-iro:      #C1D6E3;  /* accent froid — titres, séparateurs */
-  --color-asagi-fonce:    #7BA7C2;  /* accent froid renforcé */
-  --color-kobaicha:       #D9B8AB;  /* accent chaud — ornements */
-  --color-kobaicha-fonce: #8B4A3A;  /* accent chaud renforcé — liens */
+  --color-washi:          #F7F4EE;  /* fond principal — papier crème */
+  --color-washi-ombre:    #EFEAE0;  /* fond secondaire — papier vieilli */
+  --color-sumi:           #1B1A17;  /* texte principal — encre */
+  --color-sumi-doux:      #1B1A17;  /* fond mode sombre */
+  --color-usuzumi:        #6B655B;  /* texte secondaire */
+  --color-usuzumi-clair:  #9A9384;  /* texte tertiaire */
+  --color-terre:          #B4502E;  /* accent chaud — liens */
+  --color-terre-clair:    #DA8A63;  /* accent chaud (mode sombre) */
+  --color-ardoise:        #4A6670;  /* accent froid */
+  --color-ardoise-fonce:  #3A535C;  /* accent froid renforcé */
+  --color-ardoise-clair:  #7FA6B3;  /* accent froid (mode sombre) */
+  --color-ocre:           #C99A4E;  /* ornements */
 
   /* --- Dark-mode only palette --- */
-  --color-sumi-cendre:    #252830;  /* fond secondaire mode sombre */
-  --color-sumi-bordure:   #3A3D45;  /* bordure subtile mode sombre */
+  --color-sumi-cendre:    #26241F;  /* fond secondaire mode sombre */
+  --color-sumi-bordure:   #38352D;  /* bordure subtile mode sombre */
+  --color-washi-cendre:   #ECE7DC;  /* texte mode sombre */
 
   /* --- Mapping sémantique (mode clair) --- */
-  --color-bg:             var(--color-washi);
-  --color-bg-secondary:   var(--color-washi-ombre);
-  --color-text:           var(--color-sumi);
-  --color-text-muted:     var(--color-usuzumi);
-  --color-text-faint:     var(--color-usuzumi-clair);
-  --color-link:           var(--color-kobaicha-fonce);
-  --color-link-hover:     var(--color-sumi);
-  --color-accent-cold:    var(--color-asagi-iro);
-  --color-accent-cold-strong: var(--color-asagi-fonce);
-  --color-accent-warm:    var(--color-kobaicha);
-  --color-border:         var(--color-asagi-iro);
+  --color-bg:                 var(--color-washi);
+  --color-bg-secondary:       var(--color-washi-ombre);
+  --color-text:               var(--color-sumi);
+  --color-text-muted:         var(--color-usuzumi);
+  --color-text-faint:         var(--color-usuzumi-clair);
+  --color-link:               var(--color-terre);
+  --color-link-hover:         var(--color-sumi);
+  --color-accent-cold:        var(--color-ardoise);
+  --color-accent-cold-strong: var(--color-ardoise-fonce);
+  --color-accent-warm:        var(--color-ocre);
+  --color-border:             #E4DED1;
+  --color-primary:            var(--color-terre);  /* alias historique (auteurs, newsletter) */
 
   /* --- Espacement (base 4px) --- */
   --space-3xs:  0.25rem;  /*  4px */
@@ -55,11 +57,9 @@
   --space-2xl:  4rem;     /* 64px */
   --space-3xl:  6rem;     /* 96px */
 
-  /* --- Breakpoints (référence, non utilisables en var CSS) --- */
-  /* Mobile : < 640px (défaut, mobile-first) */
-  /* Tablette : 640px – 959px */
-  /* Desktop : ≥ 960px */
+  /* --- Breakpoints (référence) --- */
+  /* Mobile : < 640px · Tablette : 640–959px · Desktop : ≥ 960px */
 
   /* --- Largeur de lecture --- */
-  --content-max-width: 42rem;  /* ≈ 65-70 caractères en EB Garamond 18px */
+  --content-max-width: 42rem;  /* ≈ 65-70 caractères */
 }
