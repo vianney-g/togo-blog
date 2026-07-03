@@ -57,6 +57,11 @@
 
 .site-nav {
   margin-top: var(--space-m);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  column-gap: var(--space-m);
+  row-gap: var(--space-xs);
 }
 
 .site-nav a {
@@ -68,14 +73,6 @@
   text-transform: uppercase;
 }
 
-/* Séparateur typographique interpunct (·) entre les liens */
-.site-nav a + a::before {
-  content: "·";
-  color: var(--color-text-faint);
-  margin: 0 var(--space-s);
-  text-decoration: none;
-  pointer-events: none;
-}
 
 .site-nav a:hover,
 .site-nav a[aria-current="page"] {
