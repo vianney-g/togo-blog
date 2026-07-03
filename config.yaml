@@ -20,6 +20,9 @@ menu:
     - name: "École"
       url: "/tags/ecole/"
       weight: 15
+    - name: "Spi"
+      url: "/tags/spi/"
+      weight: 16
     - name: "Archives"
       url: "/archives/"
       weight: 20
