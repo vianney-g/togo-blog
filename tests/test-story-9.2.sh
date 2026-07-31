@@ -33,6 +33,7 @@ mkdir -p "$TMPDIR_TEST/bin"
 
 # Mock curl : lit MOCK_HTTP_CODE et MOCK_RESPONSE_BODY depuis l'env.
 # Parcourt les args pour trouver -o <fichier> et y écrire le body simulé.
+# Capture aussi les args reçus (-d et -H) dans MOCK_CURL_ARGS_FILE pour inspection.
 cat > "$TMPDIR_TEST/bin/curl" << 'MOCK_EOF'
 #!/usr/bin/env bash
 OUTPUT_FILE=""
@@ -47,6 +48,9 @@ while [ $i -lt ${#args[@]} ]; do
 done
 if [ -n "$OUTPUT_FILE" ]; then
     echo -n "${MOCK_RESPONSE_BODY:-}" > "$OUTPUT_FILE"
+fi
+if [ -n "${MOCK_CURL_ARGS_FILE:-}" ]; then
+    printf '%s\n' "${args[@]}" > "$MOCK_CURL_ARGS_FILE"
 fi
 echo -n "${MOCK_HTTP_CODE:-200}"
 MOCK_EOF
@@ -127,6 +131,22 @@ if [ $EXIT_CODE -eq 0 ] && echo "$OUTPUT" | grep -q "Email envoyé"; then
 else
     fail "AC7 — caractères spéciaux" "exit=$EXIT_CODE output=$OUTPUT"
 fi
+
+# --- Test AC8 : le JSON posté demande un envoi immédiat (pas un brouillon) ---
+echo "Test AC8: JSON posté avec status about_to_send + en-tête de confirmation"
+export MOCK_HTTP_CODE=201
+export MOCK_RESPONSE_BODY='{"id":"abc123"}'
+export MOCK_CURL_ARGS_FILE="$TMPDIR_TEST/curl-args.txt"
+OUTPUT=$(BUTTONDOWN_API_KEY="sk-test" bash "$NOTIFY" "Titre" "Desc" "https://example.com") && EXIT_CODE=$? || EXIT_CODE=$?
+POSTED_JSON=$(awk '/^-d$/{found=1; next} found' "$MOCK_CURL_ARGS_FILE")
+if [ $EXIT_CODE -eq 0 ] \
+    && echo "$POSTED_JSON" | tr -d ' \n' | grep -q '"status":"about_to_send"' \
+    && grep -qi '^X-Buttondown-Live-Dangerously: true$' "$MOCK_CURL_ARGS_FILE"; then
+    pass "AC8 — status about_to_send + en-tête de confirmation envoyés"
+else
+    fail "AC8 — status/en-tête d'envoi immédiat" "exit=$EXIT_CODE json=$POSTED_JSON args=$(cat "$MOCK_CURL_ARGS_FILE")"
+fi
+unset MOCK_CURL_ARGS_FILE
 
 echo ""
 echo "=== Résultats : $PASS pass, $FAIL fail ==="

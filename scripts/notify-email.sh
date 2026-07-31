@@ -42,18 +42,24 @@ ${DESCRIPTION}
 *Vous recevez cet email car vous êtes inscrit(e) à la newsletter Too Good Togo !*"
 
 # --- Construction du JSON (jq gère accents, guillemets, caractères spéciaux) ---
+# status "about_to_send" pour un envoi immédiat : depuis l'API 2026-04-01, Buttondown
+# crée les emails en "draft" par défaut quand ce champ est omis (défaut plus sûr).
 JSON_BODY=$(jq -n \
     --arg subject "Nouvel article sur Too Good Togo ! — ${TITLE}" \
     --arg body "$BODY" \
-    '{subject: $subject, body: $body, status: "published"}')
+    '{subject: $subject, body: $body, status: "about_to_send"}')
 
 # --- Appel API Buttondown ---
+# X-Buttondown-Live-Dangerously requis pour confirmer l'envoi immédiat via status
+# "about_to_send" (sinon 400 sending_requires_confirmation) — voir doc Buttondown.
 HTTP_CODE=$(curl -s \
     -o "$RESPONSE_FILE" \
     -w "%{http_code}" \
     -X POST "https://api.buttondown.com/v1/emails" \
     -H "Authorization: Token ${BUTTONDOWN_API_KEY}" \
     -H "Content-Type: application/json" \
+    -H "X-API-Version: 2026-04-01" \
+    -H "X-Buttondown-Live-Dangerously: true" \
     -d "$JSON_BODY")
 
 # --- Évaluation de la réponse ---
