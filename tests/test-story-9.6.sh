@@ -109,7 +109,7 @@ POSTED_JSON=$(awk '/^-d$/{found=1; next} found' "$MOCK_CURL_ARGS_FILE" 2>/dev/nu
 if [ $RC -eq 0 ] \
     && [ "$(cat "$CALLS_FILE" 2>/dev/null | wc -l)" -eq 1 ] \
     && echo "$POSTED_JSON" | grep -q "Arrivée à Sokodé" \
-    && echo "$POSTED_JSON" | grep -q "toogoodtogo.blog/2026/08/arrivee-sokode/"; then
+    && echo "$POSTED_JSON" | grep -q "toogoodtogo.blog/2026/08/arrivée-à-sokodé/"; then
     pass "Test 2 — article publié : notify-email appelé une fois avec le bon contenu"
 else
     fail "Test 2 — article publié" "rc=$RC json=$POSTED_JSON output=$OUTPUT"

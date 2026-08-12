@@ -163,6 +163,27 @@ else
 fi
 
 # ============================================================
+# Régression : nom de fichier contenant des espaces → détecté
+# ============================================================
+echo "Test régression : filename with spaces → detected"
+cat > "content/posts/2026-08-18 dans le journal.md" << 'EOF'
+---
+title: "Dans le journal"
+date: 2026-08-18
+author: "monsieur"
+draft: false
+---
+Contenu.
+EOF
+git add . && git commit -q -m "add article with spaces in filename"
+RESULT=$("$DETECT")
+if echo "$RESULT" | grep -q "dans le journal"; then
+    pass "régression — filename with spaces detected"
+else
+    fail "régression — filename with spaces" "output='$RESULT'"
+fi
+
+# ============================================================
 # AC6: extract-metadata.sh — extraction correcte
 # ============================================================
 echo "Test AC6: extract-metadata.sh — correct metadata extraction"
@@ -171,7 +192,7 @@ ALL_OK=true
 [ "$TITLE" = "Arrivée à Sokodé" ] || ALL_OK=false
 [ "$DESCRIPTION" = "Mis à jour" ] || ALL_OK=false
 [ "$DATE" = "2026-08-15" ] || ALL_OK=false
-[ "$SLUG" = "arrivee-sokode" ] || ALL_OK=false
+[ "$SLUG" = "arrivée-à-sokodé" ] || ALL_OK=false
 [ "$INSTAGRAM_IMAGE" = "/images/sokode.jpg" ] || ALL_OK=false
 if $ALL_OK; then
     pass "AC6 — metadata extraction (title, description, date, slug, instagram_image)"
@@ -183,8 +204,8 @@ fi
 # AC7: Construction URL /:year/:month/:slug/
 # ============================================================
 echo "Test AC7: URL construction from date + slug"
-if [ "$URL" = "https://toogoodtogo.blog/2026/08/arrivee-sokode/" ]; then
-    pass "AC7 — URL = https://toogoodtogo.blog/2026/08/arrivee-sokode/"
+if [ "$URL" = "https://toogoodtogo.blog/2026/08/arrivée-à-sokodé/" ]; then
+    pass "AC7 — URL = https://toogoodtogo.blog/2026/08/arrivée-à-sokodé/"
 else
     fail "AC7 — URL construction" "URL=$URL"
 fi
