@@ -230,6 +230,12 @@
   margin: var(--space-m) 0;
 }
 
+/* --- Commentaires (Cusdis) --- */
+
+.comments {
+  margin-top: var(--space-xl);
+}
+
 /* --- Article navigation prev/next --- */
 
 .article-nav {

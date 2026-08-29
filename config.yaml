@@ -38,6 +38,8 @@ params:
   subtitle: ""
   # color removed — handled by CSS tokens (--color-bg in tokens.css)
   disableHLJS: true
+  # Commentaires Cusdis (plan gratuit hébergé, https://cusdis.com)
+  cusdisAppId: "f27144a9-8e54-435d-8c53-1744ffd3b604"
 
 # Permaliens
 permalinks:

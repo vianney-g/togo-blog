@@ -1,0 +1,34 @@
+{{/*
+  comments.html — Commentaires via Cusdis
+  =============================================================================
+  Widget de commentaires Cusdis (hébergé, plan gratuit), affiché sous chaque
+  article. Synchronise le thème du widget avec le mode sombre du site (classe
+  .dark sur <html>, géré par header.html).
+
+  Configuration : params.cusdisAppId dans config.yaml.
+*/}}
+{{ if and (eq $.Section "posts") site.Params.cusdisAppId }}
+<section class="comments">
+  <div id="cusdis_thread"
+    data-host="https://cusdis.com"
+    data-app-id="{{ site.Params.cusdisAppId }}"
+    data-page-id="{{ $.RelPermalink }}"
+    data-page-url="{{ $.Permalink }}"
+    data-page-title="{{ $.Title }}"
+  ></div>
+  <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+  <script>
+    (function () {
+      function currentTheme() {
+        return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+      }
+      document.addEventListener('cusdis-rendered', function () {
+        window.CUSDIS.setTheme(currentTheme());
+      });
+      document.querySelector('.btn-dark-toggle')?.addEventListener('click', function () {
+        window.CUSDIS?.setTheme(currentTheme());
+      });
+    })();
+  </script>
+</section>
+{{ end }}
