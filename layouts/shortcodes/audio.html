@@ -1,0 +1,21 @@
+{{/* =============================================================================
+  audio.html — Lecteur audio natif (podcasts, interviews) avec légende
+  =============================================================================
+  Usage : audio src="/audio/itw.mp3" caption="Légende"
+  Params optionnels : caption
+
+  Nécessaire car le <audio> HTML brut en Markdown est supprimé au rendu
+  (config.yaml : markup.goldmark.renderer.unsafe: false).
+  ============================================================================= */}}
+
+{{ $src := .Get "src" }}
+{{ $caption := .Get "caption" }}
+
+<div class="audio-embed">
+  {{ with $src }}
+    <audio controls preload="metadata" src="{{ . | strings.TrimLeft "/" | relURL }}"></audio>
+  {{ end }}
+  {{ with $caption }}
+    <p class="audio-embed__caption">{{ . | markdownify }}</p>
+  {{ end }}
+</div>

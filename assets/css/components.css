@@ -131,6 +131,26 @@
   font-style: italic;
 }
 
+/* --- Audio --- */
+
+.audio-embed {
+  margin: var(--space-l) 0;
+  text-align: center;
+}
+
+.audio-embed audio {
+  width: 100%;
+  max-width: 480px;
+}
+
+.audio-embed__caption {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  margin-top: var(--space-2xs);
+  font-style: italic;
+}
+
 /* --- Callout --- */
 
 .callout {
