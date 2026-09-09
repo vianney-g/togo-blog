@@ -1,10 +1,18 @@
 {{- /*
-  month-year-fr.html — Convertit "January 2006" en "janvier 2006"
+  month-year-fr.html — Convertit une clé GroupByDate "January 2006" en "janvier 2006"
   Usage : {{ partial "month-year-fr.html" .Key }}
+
+  Note : depuis Hugo 0.165, GroupByDate localise déjà le nom du mois via
+  languageCode "fr" (la clé arrive donc déjà en français, ex: "septembre 2026").
+  On ne traduit que si on reconnaît un mois anglais, sinon on renvoie la clé telle quelle.
 */ -}}
 {{- $months := dict "January" "janvier" "February" "février" "March" "mars" "April" "avril" "May" "mai" "June" "juin" "July" "juillet" "August" "août" "September" "septembre" "October" "octobre" "November" "novembre" "December" "décembre" -}}
 {{- $parts := split . " " -}}
-{{- $monthEN := index $parts 0 -}}
+{{- $monthIn := index $parts 0 -}}
 {{- $year := index $parts 1 -}}
-{{- $monthFR := index $months $monthEN -}}
+{{- $monthFR := index $months $monthIn -}}
+{{- if $monthFR -}}
 {{- printf "%s %s" $monthFR $year -}}
+{{- else -}}
+{{- . -}}
+{{- end -}}
