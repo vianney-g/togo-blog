@@ -3,8 +3,8 @@
 # notify-new-articles.sh <content-repo-dir>
 # =============================================================================
 # Enchaîne detect-new-articles.sh → extract-metadata.sh → notify-email.sh
-# pour notifier par email chaque article nouvellement publié dans le commit
-# entrant du dépôt content.
+# pour notifier par email chaque article nouvellement publié dans la plage
+# [base-ref, HEAD] du dépôt content.
 #
 # Ne fait jamais échouer le job CI qui l'appelle : une notification en échec
 # (clé API absente, erreur Buttondown) est loguée puis ignorée, le script
@@ -16,9 +16,10 @@
 set -uo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-CONTENT_DIR="${1:?Usage: notify-new-articles.sh <content-repo-dir>}"
+CONTENT_DIR="${1:?Usage: notify-new-articles.sh <content-repo-dir> [base-ref]}"
+BASE_REF="${2:-HEAD~1}"
 
-NEW_ARTICLES=$(cd "$CONTENT_DIR" && "$SCRIPT_DIR/detect-new-articles.sh")
+NEW_ARTICLES=$(cd "$CONTENT_DIR" && "$SCRIPT_DIR/detect-new-articles.sh" "$BASE_REF")
 
 if [ -z "$NEW_ARTICLES" ]; then
     echo "Aucun nouvel article détecté"

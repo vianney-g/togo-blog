@@ -120,16 +120,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # --- Checkout content avec historique (nécessaire pour git diff HEAD~1) ---
+      # --- Checkout content avec historique complet ---
+      # fetch-depth: 0 (pas juste 2) car un push côté content peut contenir
+      # plusieurs commits : on doit pouvoir comparer jusqu'au SHA "before"
+      # réel du push (client_payload), pas juste HEAD~1.
       - name: Checkout content
         uses: actions/checkout@v4
         with:
           repository: vianney-g/togo-blog-content
           path: content-repo
           token: ${{ secrets.CONTENT_READ_PAT }}
-          fetch-depth: 2
+          fetch-depth: 0
 
       - name: Détecter et notifier les nouveaux articles
         env:
           BUTTONDOWN_API_KEY: ${{ secrets.BUTTONDOWN_API_KEY }}
-        run: scripts/notify-new-articles.sh content-repo
+          BASE_REF: ${{ github.event.client_payload.before }}
+        run: scripts/notify-new-articles.sh content-repo "${BASE_REF:-HEAD~1}"
