@@ -18,7 +18,7 @@ menu:
       url: "/authors/"
       weight: 10
     - name: "École"
-      url: "/tags/ecole/"
+      url: "/tags/école/"
       weight: 15
     - name: "Spi"
       url: "/tags/spi/"
