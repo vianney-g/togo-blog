@@ -421,14 +421,12 @@ a.tag:hover {
   border-bottom: none;
 }
 
-/* --- Author icon (SVG inline) --- */
+/* --- Author icon (emoji) --- */
 
 .author-icon {
-  width: 1.2em;
-  height: 1.2em;
-  vertical-align: -0.15em;
   display: inline-block;
-  color: currentColor;
+  font-style: normal;
+  line-height: 1;
 }
 
 .author-card__icon {
@@ -471,10 +469,8 @@ a.tag:hover {
   margin-right: 0.3em;
 }
 
-.author-page__icon .author-icon {
-  width: 1em;
-  height: 1em;
-  vertical-align: -0.1em;
+.author-page__icon {
+  margin-right: 0.3em;
 }
 
 .author-page__bio {
