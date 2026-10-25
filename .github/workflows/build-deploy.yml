@@ -66,8 +66,8 @@ jobs:
           echo "=== Contenu mergé ==="
           echo "Articles :"
           find content/ -name "*.md" -not -name "_index.md" | wc -l
-          echo "Images :"
-          find static/img/ -type f 2>/dev/null | wc -l || echo "0"
+          echo "Médias (images, sons) :"
+          find static/ -mindepth 2 -type f -path 'static/[0-9][0-9][0-9][0-9]-*' 2>/dev/null | wc -l || echo "0"
 
       # --- Setup Hugo ---
       - name: Setup Hugo

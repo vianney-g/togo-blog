@@ -50,8 +50,8 @@
     },
     "instagram_image": {
       "type": "string",
-      "description": "Chemin relatif vers l'image pour le post Instagram automatique (ex: img/2026-08/arrivee-01.jpg). Optionnel — si absent, pas de post Instagram.",
-      "pattern": "^img/.*\\.(jpg|jpeg|png|webp)$"
+      "description": "Chemin relatif vers l'image pour le post Instagram automatique (ex: 2026-08-28-bonne-arrivee/arrivee-01.jpg). Optionnel — si absent, pas de post Instagram.",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}-[^/]+/.*\\.(jpg|jpeg|png|webp)$"
     }
   },
   "additionalProperties": false

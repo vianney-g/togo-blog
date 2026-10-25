@@ -6,8 +6,7 @@ resources/
 # Synced content from togo-blog-content (make sync)
 content/*
 !content/.gitkeep
-static/img/
-static/audio/
+static/[0-9][0-9][0-9][0-9]-*/
 
 # OS files
 .DS_Store

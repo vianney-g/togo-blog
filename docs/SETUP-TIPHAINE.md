@@ -67,7 +67,8 @@ Le script install-hooks configure aussi le hook de vérification (un contrôle a
 
 1. Ouvre **Typora** (si tu ne l'as pas, télécharge-le sur [typora.io](https://typora.io))
 2. Va dans **Fichier → Préférences**
-3. Dans la section **Images**, choisis **"Copier dans le dossier ./static/img/"**
+3. Dans la section **Images**, choisis **"Copier l'image dans un dossier personnalisé"** et indique `../../static/${filename}`
+   (chaque article range ainsi ses images dans `static/<nom-du-fichier-de-l-article>/`)
 4. Ferme les préférences
 
 > *Illustration : préférences Typora avec le réglage images*

@@ -78,16 +78,19 @@ $btn.Add_Click({
         }
 
         # --- Auto-fix des chemins d'images Typora ---
-        # Typora insère des chemins absolus Windows (C:\Users\...\static\img\...)
-        # ou relatifs (./static/img/...) au lieu du chemin web Hugo (/img/...).
+        # Typora insère des chemins absolus Windows (C:\Users\...\static\<article>\...)
+        # ou relatifs (../../static/<article>/...) au lieu du chemin web Hugo (/<article>/...).
         # On corrige automatiquement avant le commit.
         $postsDir = Join-Path $contentDir "content\posts"
         if (Test-Path $postsDir) {
             $mdFiles = Get-ChildItem -Path $postsDir -Filter "*.md"
             foreach ($file in $mdFiles) {
                 $raw = Get-Content $file.FullName -Raw -Encoding UTF8
-                # Remplace les chemins absolus Windows ou relatifs pointant vers static\img\
-                $fixed = $raw -replace '\]\((?:[A-Za-z]:\\[^)]*?|\.[\\/][^)]*?)static[\\/]img[\\/]([^)]+)\)', '](/img/$1)'
+                # Remplace les chemins absolus Windows ou relatifs pointant vers static\
+                # (les \ du chemin Windows deviennent des / dans l'URL)
+                $fixed = [regex]::Replace($raw,
+                    '\]\((?:[A-Za-z]:\\[^)]*?|\.{1,2}[\\/][^)]*?)static[\\/]([^)]+)\)',
+                    { param($m) '](/' + ($m.Groups[1].Value -replace '\\', '/') + ')' })
                 if ($fixed -ne $raw) {
                     Set-Content $file.FullName $fixed -Encoding UTF8 -NoNewline
                 }

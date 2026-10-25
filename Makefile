@@ -19,4 +19,4 @@ build: sync
 clean:
 	rm -rf public/ resources/
 	find content/ -mindepth 1 -not -path 'content/.gitkeep' -depth -delete 2>/dev/null || true
-	find static/img/ -mindepth 1 -depth -delete 2>/dev/null || true
+	find static/ -mindepth 1 -maxdepth 1 -type d -name '[0-9][0-9][0-9][0-9]-*' -exec rm -rf {} + 2>/dev/null || true

@@ -5,7 +5,7 @@ author: ""
 draft: true
 description: ""
 tags: []
-# instagram_image: "img/YYYY-MM/photo.jpg"   # optionnel — pour post Instagram automatique
+# instagram_image: "AAAA-MM-JJ-mon-article/photo.jpg" # optionnel — pour post Instagram automatique
 ---
 
 <!-- 
