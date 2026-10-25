@@ -13,7 +13,7 @@ Ce projet se pense et se discute **en français**. Réponds en français dans ce
 ## Architecture à deux dépôts
 
 - `togo-blog` (ce dépôt) : le site Hugo — layouts, CSS, config, JSON Schema, workflows CI, scripts de publication/notification.
-- `togo-blog-content` (dépôt séparé, absent d'ici) : `content/` (articles) et `static/` (images), plus sa propre copie du hook `.githooks/pre-commit` de filtrage des prénoms (c'est là-bas que ce hook compte vraiment, puisque les prénoms réels pourraient apparaître dans les brouillons d'articles). En local, ce dépôt est cloné dans `../togo-blog-content` (soit `/home/vianney/Work/togo-blog-content`), à côté de ce répertoire.
+- `togo-blog-content` (dépôt séparé, absent d'ici) : `content/` (articles) et `static/` (images), plus sa propre copie du hook `.githooks/pre-commit` de filtrage des prénoms (c'est là-bas que ce hook compte vraiment, puisque les prénoms réels pourraient apparaître dans les brouillons d'articles). En local, ce dépôt est cloné dans `../togo-blog-content` (soit `~/Work/togo-blog-content`), à côté de ce répertoire.
 - En dev local, les deux dépôts sont reliés — voir « Développement local » ci-dessous. En CI, `.github/workflows/build-deploy.yml` checkout les deux dépôts et copie `content-repo/content` et `content-repo/static` dans l'arborescence de ce dépôt avant de builder.
 - Le thème (`themes/hugo-paper`, un fork sur `vianney-g/hugo-paper`) est un **submodule git** — cloner/puller avec `--recurse-submodules` ou lancer `git submodule update --init --recursive`, sinon le dossier du thème est vide et le build échoue.
 
@@ -46,13 +46,13 @@ La plupart des tests de story sont des vérifications d'acceptation liées à un
 
 ## Modèle de contenu & validation
 
-- Les articles sont des fichiers Markdown avec un front matter YAML validé contre `schemas/frontmatter.schema.json` (`additionalProperties: false` — toute clé de front matter inconnue fait échouer la validation). Requis : `title`, `date`, `author`, `draft`. Optionnel : `description`, `tags`, `authors` (taxonomie Hugo, doit correspondre à un slug sous `content/auteurs/`), `instagram_image` (chemin respectant `^img/.*\.(jpg|jpeg|png|webp)$`, déclenche un post Instagram automatique).
+- Les articles sont des fichiers Markdown avec un front matter YAML validé contre `schemas/frontmatter.schema.json` (`additionalProperties: false` — toute clé de front matter inconnue fait échouer la validation). Requis : `title`, `date`, `author`, `draft`. Optionnel : `description`, `tags`, `authors` (taxonomie Hugo, doit correspondre à un slug sous `content/auteurs/`), `instagram_image` (chemin respectant `^[0-9]{4}-[0-9]{2}-[0-9]{2}-[^/]+/.*\.(jpg|jpeg|png|webp)$`, ex. `2026-08-28-bonne-arrivee/photo.jpg`, déclenche un post Instagram automatique).
 - Les nouveaux articles se créent depuis `archetypes/default.md` (`hugo new posts/...`), qui pré-remplit le front matter requis et des rappels en commentaires.
 - Les permaliens suivent le format `/:year/:month/:slug/` (voir `config.yaml`) ; `scripts/extract-metadata.sh` dérive le slug depuis la convention de nommage `YYYY-MM-DD-slug.md` et reconstruit cette URL pour les notifications.
 
 ## Protection des prénoms réels (critique pour la vie privée)
 
-Les prénoms réels de la famille (`Vianney|Tiphaine|Jeanne|Jos[eé]phine|Mayeul|Marthe`, dans `.githooks/pre-commit` et `scripts/scan-names-ci.sh`) ne doivent **jamais** apparaître dans du texte commité — les articles utilisent des pseudonymes à la place (voir `docs/EDITORIAL-GUIDELINES.md` — « Monsieur », « Madame », « Plume »). Cela est vérifié à deux niveaux, avec la même regex, tous deux définis dans ce dépôt (mais c'est le hook pre-commit qui compte vraiment au quotidien, dans le dépôt `togo-blog-content`, où il est installé via `git config core.hooksPath .githooks`) :
+Les prénoms réels de la famille (la liste est la regex définie dans `.githooks/pre-commit` et `scripts/scan-names-ci.sh` ; ne pas la recopier ailleurs, le hook refuserait le fichier) ne doivent **jamais** apparaître dans du texte commité — les articles utilisent des pseudonymes à la place (voir `docs/EDITORIAL-GUIDELINES.md` — « Monsieur », « Madame », « Plume »). Cela est vérifié à deux niveaux, avec la même regex, tous deux définis dans ce dépôt (mais c'est le hook pre-commit qui compte vraiment au quotidien, dans le dépôt `togo-blog-content`, où il est installé via `git config core.hooksPath .githooks`) :
 1. **Hook pre-commit local** (`.githooks/pre-commit`) — scanne les fichiers staged `*.md|*.yaml|*.yml|*.toml|*.txt|*.json`, bloque le commit.
 2. **Filet de sécurité CI** (`scripts/scan-names-ci.sh`) — scanne tout l'arbre, pas seulement les fichiers staged.
 
