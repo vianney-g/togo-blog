@@ -3,12 +3,13 @@
   =============================================================================
   Paramètre : nom de l'icône (string), tiré du front matter `icon` de
   content/auteurs/<auteur>.md.
-  Icônes connues : moustache (🎩 Monsieur), fleur (👒 Madame), plume (🪶 Plume).
+  Icônes connues : moustache (🎩 Monsieur), fleur (👒 Madame), plume (🪶 Plume),
+  licorne (🦄 Licorne).
   Toute autre valeur est affichée telle quelle : on peut donc aussi mettre
   directement un emoji dans le front matter.
 
   Référence : Story 6.3
 */}}
 
-{{- $emojis := dict "moustache" "🎩" "fleur" "👒" "plume" "🪶" -}}
+{{- $emojis := dict "moustache" "🎩" "fleur" "👒" "plume" "🪶" "licorne" "🦄" -}}
 <span class="author-icon" aria-hidden="true">{{ index $emojis . | default . }}</span>
